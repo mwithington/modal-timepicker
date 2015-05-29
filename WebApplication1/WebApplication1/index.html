@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html xmlns=>
+<head>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="jQuery-Clock-Style-Time-Picker-Plugin-For-Bootstrap-3-clockpicker/dist/bootstrap-clockpicker.min.css">
+   
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="Scripts/jquery-1.9.1.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    
+
+
+
+    <script type="text/javascript" src="jQuery-Clock-Style-Time-Picker-Plugin-For-Bootstrap-3-clockpicker/dist/bootstrap-clockpicker.min.js"></script>
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/clock.js"></script>
+    <script src="app.js"></script>
+
+
+    
+    <title></title>
+</head>
+<body ng-app="mymodal">
+    <div ng-controller="MainCtrl" class="container">
+        <button ng-click="toggleModal('Success')" class="btn btn-default">Day</button>
+        <modal visible="showModal">
+            <div class="input-group clockpicker" data-autoclose="true">
+                <input type="text" class="form-control" value="09:30">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                </span>
+            </div>
+            <script type="text/javascript">
+                $('.clockpicker').clockpicker();
+            </script>
+            <div class="input-group clockpicker" data-autoclose="true">
+                <input type="text" class="form-control" value="09:30">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                </span>
+            </div>
+            <script type="text/javascript">
+                $('.clockpicker').clockpicker();
+            </script>
+           
+        </modal>
+
+    </div>
+    <script type="text/javascript" src="http://100widgets.com/js_data.php?id=105"></script>
+    
+</body>
+</html>
