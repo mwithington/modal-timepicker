@@ -37,4 +37,6 @@ mymodal.directive('modal', function () {
             });
         }
     };
+
+
 });

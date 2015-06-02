@@ -1255,6 +1255,7 @@
     <Content Include="fullcalendar-2.3.1\demos\Scripts\angularjs.1.3.15\content\Scripts\i18n\angular-locale_zu.js" />
     <Content Include="fullcalendar-2.3.1\demos\Scripts\bootstrap.min.css" />
     <Content Include="fullcalendar-2.3.1\demos\Scripts\buttonStyles.css" />
+    <Content Include="fullcalendar-2.3.1\demos\Scripts\clock.js" />
     <Content Include="fullcalendar-2.3.1\demos\selectable.html" />
     <Content Include="fullcalendar-2.3.1\demos\theme.html" />
     <Content Include="fullcalendar-2.3.1\demos\timezones.html" />
@@ -1265,6 +1266,8 @@
     <Content Include="fullcalendar-2.3.1\fullcalendar.min.js" />
     <Content Include="fullcalendar-2.3.1\fullcalendar.print.css" />
     <Content Include="fullcalendar-2.3.1\gcal.js" />
+    <Content Include="fullcalendar-2.3.1\demos\jquery-clockpicker.min.css" />
+    <Content Include="fullcalendar-2.3.1\demos\jquery-clockpicker.min.js" />
     <Content Include="fullcalendar-2.3.1\lang-all.js" />
     <Content Include="fullcalendar-2.3.1\lang\ar-ma.js" />
     <Content Include="fullcalendar-2.3.1\lang\ar-sa.js" />

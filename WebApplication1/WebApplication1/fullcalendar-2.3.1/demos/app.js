@@ -38,4 +38,72 @@ mymodal.directive('modal', function () {
             });
         }
     };
+
+
+
 });
+
+mymodal.directive('fullCalendar', function () {
+    return {
+        restrict: "E",
+        template: "<div>Hello There </div>",
+        transclude: true,
+        scope: true,
+        link: function postLink(scope, element, attrs) {
+            console.log("Element Children", element.children());
+
+            element.children("#calendar").fullCalendar({
+                defaultDate: '2015-02-12',
+                editable: true,
+                eventLimit: true, // allow "more" link when too many events
+                events: [
+                    {
+                        title: 'Click for Google',
+                        url: 'gcal.html',
+                        start: '2015-05-28'
+                    }
+                ],
+                dayClick: function (date, jsEvent, view) {
+
+                    console.log('Clicked on: ' + date.format());
+                    $('#myModal').modal("show");
+
+
+                    // change the day's background color just for fun
+                    $(this).css('background-color', 'red');
+
+                }
+
+            });
+        },
+
+        
+
+    }
+        //$('#calendar').fullCalendar({
+        //    defaultDate: '2015-02-12',
+        //    editable: true,
+        //    eventLimit: true, // allow "more" link when too many events
+        //    events: [
+        //        {
+        //            title: 'Click for Google',
+        //            url: 'gcal.html',
+        //            start: '2015-05-28'
+        //        }
+        //    ],
+        //    dayClick: function (date, jsEvent, view) {
+
+        //        console.log('Clicked on: ' + date.format());
+        //        $('#myModal').modal("show");
+
+
+        //        // change the day's background color just for fun
+        //        $(this).css('background-color', 'red');
+
+        //    }
+
+        //});
+
+
+});
+   
