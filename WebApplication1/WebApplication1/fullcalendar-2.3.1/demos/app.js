@@ -66,8 +66,26 @@ mymodal.directive('fullCalendar', function () {
                 selectable: true,
                 select: function (start, end) {
                     console.log('Selected something: ' );
-                    $('#myModal').modal("show");
+                    var modalShow = $('#myModal').modal("show");
+                    
+                    
+                    var eventData;
+                    var x = document.getElementById("Start").value;
+                    var y = document.getElementById("End").value;
+                    //var modalHide = $('#myModal').modal("hide");
+                    var eventData;
+                    if (modalShow) {
+                        
+                        //console.log(x, "start: ");
+                        eventData = {
+                            title: x,
+                            start: start,
+                            end: end
+                        };
+                        $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+                    }
                 }
+                
 
                 /*dayClick: function (date, jsEvent, view) {
 
