@@ -88,6 +88,8 @@
 <script src="app.js"></script>
 <script>
     function myFunction() {
+        var sTime24;
+        var eTime24;
         var x = document.getElementById("Start").value;
         var y = document.getElementById("End").value;
         console.log(x, "This is start time");
@@ -95,10 +97,48 @@
         var eTime = y.split(":", 1);
         
         var sTime = x.split(":", 1);
+        console.log(eTime)
 
-        var z = eTime - sTime;
+        var isAM = x[5];
+        var isPM = y[5];
+        console.log(isAM)
+        console.log(isPM)
+        switch (isPM) {
+            case "P":
+                eTime24 = parseInt(eTime, 10) + 12;
+                break;
+            default:
+                eTime24 = parseInt(eTime, 10);
+        };
+        switch (x[6]) {
+            case "P":
+                sTime24 = parseInt(sTime, 10) + 12;
+                break;
+            default:
+                sTime24 = parseInt(sTime, 10);
+        };
+
+        //if (x[6] == "P") {
+        //    var sTime24 = parseInt(sTime, 10) + 12;
+        //    var eTime24 = parseInt(eTime, 10) + 12;
+        //    var z = eTime24 - sTime24;
+        //    console.log(z, "Hours worked");
+        //};
+
+
+
+        //if (y[6] == "P") {
+        //    var eTime24 = parseInt(eTime, 10) + 12;
+        //    var z = eTime24 - sTime;
+        //    console.log(z, "Hours worked");
+        //};
         
-        console.log(y[1], "This is end Time");
+
+        console.log(eTime24)
+
+        
+        var z = eTime24 - sTime24;
+        
         console.log(z)
 
         
