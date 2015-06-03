@@ -57,8 +57,7 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
-  <ItemGroup>
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
@@ -477,6 +476,8 @@
     <Content Include="Full-Size-Drag-Drop-Calendar-Plugin-FullCalendar\tests\triggers.html" />
     <Content Include="Full-Size-Drag-Drop-Calendar-Plugin-FullCalendar\tests\triggers_view.html" />
     <Content Include="Full-Size-Drag-Drop-Calendar-Plugin-FullCalendar\tests\week_numbers.html" />
+    <Content Include="fullcalendar-2.3.1\demos\bootstrap-clockpicker.min.css" />
+    <Content Include="fullcalendar-2.3.1\demos\bootstrap-clockpicker.min.js" />
     <Content Include="fullcalendar-2.3.1\changelog.txt" />
     <Content Include="fullcalendar-2.3.1\demos\agenda-views.html" />
     <Content Include="fullcalendar-2.3.1\demos\app.js" />
@@ -485,6 +486,8 @@
     <Content Include="fullcalendar-2.3.1\demos\default.html" />
     <Content Include="fullcalendar-2.3.1\demos\external-dragging.html" />
     <Content Include="fullcalendar-2.3.1\demos\gcal.html" />
+    <Content Include="fullcalendar-2.3.1\demos\jquery-clockpicker.min.css" />
+    <Content Include="fullcalendar-2.3.1\demos\jquery-clockpicker.min.js" />
     <Content Include="fullcalendar-2.3.1\demos\json.html" />
     <Content Include="fullcalendar-2.3.1\demos\languages.html" />
     <Content Include="fullcalendar-2.3.1\demos\Scripts\angularjs.1.3.15\content\Scripts\angular-animate.js" />
@@ -1266,8 +1269,8 @@
     <Content Include="fullcalendar-2.3.1\fullcalendar.min.js" />
     <Content Include="fullcalendar-2.3.1\fullcalendar.print.css" />
     <Content Include="fullcalendar-2.3.1\gcal.js" />
-    <Content Include="fullcalendar-2.3.1\demos\jquery-clockpicker.min.css" />
-    <Content Include="fullcalendar-2.3.1\demos\jquery-clockpicker.min.js" />
+    <Content Include="jquery-clockpicker.min.css" />
+    <Content Include="jquery-clockpicker.min.js" />
     <Content Include="fullcalendar-2.3.1\lang-all.js" />
     <Content Include="fullcalendar-2.3.1\lang\ar-ma.js" />
     <Content Include="fullcalendar-2.3.1\lang\ar-sa.js" />
