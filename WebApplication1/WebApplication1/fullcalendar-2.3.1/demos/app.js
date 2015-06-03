@@ -63,23 +63,31 @@ mymodal.directive('fullCalendar', function () {
                         start: '2015-05-28'
                     }
                 ],
-                dayClick: function (date, jsEvent, view) {
+                selectable: true,
+                select: function (start, end) {
+                    console.log('Selected something: ' );
+                    $('#myModal').modal("show");
+                }
+
+                /*dayClick: function (date, jsEvent, view) {
 
                     console.log('Clicked on: ' + date.format());
                     $('#myModal').modal("show");
-
-
                     // change the day's background color just for fun
                     $(this).css('background-color', 'red');
-
-                }
+                }*/
 
             });
+
         },
+
+    }
+         
+        
 
         
 
-    }
+    
         //$('#calendar').fullCalendar({
         //    defaultDate: '2015-02-12',
         //    editable: true,
