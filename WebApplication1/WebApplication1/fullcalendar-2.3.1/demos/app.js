@@ -2,28 +2,36 @@
 var mymodal = angular.module('mymodal', []);
 var btnClicked = false;
 var sTime1;
+var title;
 
 var startT;
 var endT;
 
 
-function doSubmit() {
-    $('#myModal').modal('hide');
-    $("#calendar").fullCalendar('renderEvent',
-        {
-            title: $('#Start').val(),
-            start: startT,
-            end: endT,
-            allday: true,
-        },
-        true);
+function days_between(date1, date2) {
+
+    // The number of milliseconds in one day
+    var ONE_DAY = 1000 * 60 * 60 * 24
+
+    // Convert both dates to milliseconds
+    var date1_ms = date1.getTime()
+    var date2_ms = date2.getTime()
+
+    // Calculate the difference in milliseconds
+    var difference_ms = Math.abs(date1_ms - date2_ms)
+
+    // Convert back to days and return
+
+    console.log(Math.round(difference_ms / ONE_DAY));
+    return Math.round(difference_ms / ONE_DAY)
 
 }
 
 
 
 
-mymodal.controller('MainCtrl', function ($scope) {
+
+mymodal.controller('MainCtrl', function ($scope, CalendarFactory) {
     $scope.showModal = false;
     
     $scope.buttonClicked = "";
@@ -34,62 +42,9 @@ mymodal.controller('MainCtrl', function ($scope) {
 
     };
 
-    $scope.hoursCalc = function () {
+    $scope.hoursClick = factory.hoursCalc();
+   
 
-        doSubmit();
-
-
-        btnClicked = true;
-        var sTime24;
-
-        var eTime24;
-
-        var x = document.getElementById("Start").value;
-
-        var y = document.getElementById("End").value;
-
-        sTime1 = x;
-
-        console.log(x, "This is start time")
-        console.log(y, "This is end Time")
-        var eTime = y.split(":", 1)
-
-        var sTime = x.split(":", 1)
-        console.log(eTime)
-
-        var isAM = x[5];
-        var isPM = y[5];
-        console.log(isAM)
-        console.log(isPM)
-        switch (isPM) {
-          case "P":
-             eTime24 = parseInt(eTime, 10) + 12;
-          break;
-          default:
-             eTime24 = parseInt(eTime, 10);
-        };
-        switch (x[6]) {
-         case "P":
-           sTime24 = parseInt(sTime, 10) + 12;
-           break;
-         default:
-           sTime24 = parseInt(sTime, 10);
-        };
-        console.log(eTime24);
-
-        var z = eTime24 - sTime24;
-
-        console.log(z);
-
-        document.getElementById("Start").value = "Start Time";
-        document.getElementById("End").value = "End Time";
-        
-
-    }
-
-    $scope.doSubmit = function () {
-        
-    }
 
 });
 
@@ -147,7 +102,6 @@ mymodal.directive('fullCalendar', function () {
             console.log("Element Children", element.children());
 
             element.children("#calendar").fullCalendar({
-                defaultDate: '2015-02-12',
                 editable: true,
                 eventLimit: true, // allow "more" link when too many events
                 events: [
@@ -235,4 +189,104 @@ mymodal.directive('fullCalendar', function () {
 
 
 });
+
+
+
+mymodal.factory("CalendarFactory", function () {
+    function doSubmit() {
+        $('#myModal').modal('hide');
+        $("#calendar").fullCalendar('renderEvent',
+            {
+
+                title: title,
+                start: startT,
+                end: endT,
+                allday: true,
+            },
+            true);
+
+
+        console.log(startT, "statt date");
+        console.log(endT, "endt date");
+
+        var date1 = new Date(startT.format());
+        var date2 = new Date(endT.format());
+
+        console.log(date1, "Date one");
+        console.log(date2, "Date two");
+
+        days_between(date1, date2);
+
+        var test = startT;
+        console.log(test, "this is test")
+    }
+
+    hoursCalc = function () {
+        var x = document.getElementById("Start").value;
+
+        var y = document.getElementById("End").value;
+        title = x + '-' + y
+
+        doSubmit();
+
+
+        btnClicked = true;
+        var sTime24;
+
+        var eTime24;
+
+
+
+        sTime1 = x;
+
+        console.log(x, "This is start time")
+        console.log(y, "This is end Time")
+        var eTime = y.split(":", 1)
+
+        var sTime = x.split(":", 1)
+        console.log(eTime)
+
+        var isAM = x[5];
+        var isPM = y[5];
+        console.log(isAM)
+        console.log(isPM)
+        switch (isPM) {
+            case "P":
+                eTime24 = parseInt(eTime, 10) + 12;
+                break;
+            default:
+                eTime24 = parseInt(eTime, 10);
+        };
+        switch (x[6]) {
+            case "P":
+                sTime24 = parseInt(sTime, 10) + 12;
+                break;
+            default:
+                sTime24 = parseInt(sTime, 10);
+        };
+        console.log(eTime24);
+
+        var z = eTime24 - sTime24;
+
+        console.log(z);
+
+        document.getElementById("Start").value = "";
+        document.getElementById("End").value = "";
+
+
+    }
+
+    var factory = {
+
+        doSubmit: doSubmit,
+        hoursCalc: hoursCalc
+    }
+
+    return factory
+        
+
+
+})
+
+
 
