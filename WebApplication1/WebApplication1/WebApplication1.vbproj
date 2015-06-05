@@ -484,6 +484,7 @@
     <Content Include="fullcalendar-2.3.1\demos\background-events.html" />
     <Content Include="fullcalendar-2.3.1\demos\basic-views.html" />
     <Content Include="fullcalendar-2.3.1\demos\calculationTime.js" />
+    <Content Include="fullcalendar-2.3.1\demos\clock.js" />
     <Content Include="fullcalendar-2.3.1\demos\default.html" />
     <Content Include="fullcalendar-2.3.1\demos\external-dragging.html" />
     <Content Include="fullcalendar-2.3.1\demos\gcal.html" />

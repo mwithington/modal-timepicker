@@ -1,8 +1,31 @@
 //code for day click modal
 var mymodal = angular.module('mymodal', []);
+var btnClicked = false;
+var sTime1;
+
+var startT;
+var endT;
+
+
+function doSubmit() {
+    $('#myModal').modal('hide');
+    $("#calendar").fullCalendar('renderEvent',
+        {
+            title: $('#Start').val(),
+            start: startT,
+            end: endT,
+            allday: true,
+        },
+        true);
+
+}
+
+
+
 
 mymodal.controller('MainCtrl', function ($scope) {
     $scope.showModal = false;
+    
     $scope.buttonClicked = "";
     $scope.toggleModal = function (btnClicked) {
         $scope.buttonClicked = btnClicked;
@@ -12,6 +35,11 @@ mymodal.controller('MainCtrl', function ($scope) {
     };
 
     $scope.hoursCalc = function () {
+
+        doSubmit();
+
+
+        btnClicked = true;
         var sTime24;
 
         var eTime24;
@@ -20,6 +48,7 @@ mymodal.controller('MainCtrl', function ($scope) {
 
         var y = document.getElementById("End").value;
 
+        sTime1 = x;
 
         console.log(x, "This is start time")
         console.log(y, "This is end Time")
@@ -52,10 +81,16 @@ mymodal.controller('MainCtrl', function ($scope) {
 
         console.log(z);
 
-
+        document.getElementById("Start").value = "Start Time";
+        document.getElementById("End").value = "End Time";
         
 
     }
+
+    $scope.doSubmit = function () {
+        
+    }
+
 });
 
 
@@ -96,6 +131,12 @@ mymodal.directive('modal', function () {
 
 });
 
+
+
+
+
+
+
 mymodal.directive('fullCalendar', function () {
     return {
         restrict: "E",
@@ -117,31 +158,36 @@ mymodal.directive('fullCalendar', function () {
                     }
                 ],
                 selectable: true,
+                
                 select: function (start, end) {
                     console.log('Selected something: ' );
                     var modalShow = $('#myModal').modal("show");
-                    
-                    
+                    console.log("Hello!!!");
+                    console.log(start);
+                    console.log(end);
                     var eventData;
-                    
+
                     var x = document.getElementById("Start").value;
                     var y = document.getElementById("End").value;
 
                     console.log(x)
 
                     //var modalHide = $('#myModal').modal("hide");
+
                     var eventData;
-                    if (modalShow) {
-                        
-                        //console.log(x, "start: ");
-                        eventData = {
-                            title: x,
-                            start: start,
-                            end: end
-                        };
-                        $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-                    }
-                }
+
+                    endT = end;
+                    startT =start;
+
+
+                    //console.log(x, "start: ");
+                    console.log(btnClicked, "this is the bootan")
+                                
+                                       
+                },
+                unselect: function (start, end) {                    
+                   
+            }
                 
 
                 /*dayClick: function (date, jsEvent, view) {
@@ -189,5 +235,4 @@ mymodal.directive('fullCalendar', function () {
 
 
 });
-
 

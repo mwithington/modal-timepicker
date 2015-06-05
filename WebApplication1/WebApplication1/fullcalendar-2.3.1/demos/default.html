@@ -35,58 +35,96 @@
 
     <div container ng-controller="MainCtrl">
         <full-calendar ng-transclude>
-            <div id="calendar">calendar goes here</div>
+            <div id="calendar"></div>
         </full-calendar>
-         
-       
-            
+
+
+
     </div>
-        
 
-	
+
+
     <div ng-controller="MainCtrl" class="container">
-       
+
         <modal visible="showModal" id="myModal">
-            <div class="input-group clockpicker" donetext="Hello!">
-                <input type="text" class="form-control" value="09:30" id="Start">
+            <div class="input-group clockpicker">
+                <input type="text" class="form-control" value="Start Time" id="Start">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                </span>
+            </div>
+            <script type="text/javascript">
+                $('.clockpicker-with-callbacks').clockpicker({
+                    donetext:"Submit Time",
+                    twelvehour: "true",
+
+                });
+            </script>
+            <div class="input-group clockpicker">
+                <input type="text" class="form-control" value="End Time" id="End">
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-time"></span>
                 </span>
             </div>
             <script type="text/javascript">
                 $('.clockpicker').clockpicker({
-                    twelvehour: "true"
-                });
-            </script>
-            <div class="input-group clockpicker" data-autoclose="true" >
-                <input type="text" class="form-control" value="09:30" id="End">
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-time"></span>
-                </span>
-            </div>
-            <script type="text/javascript">
-                $('.clockpicker').clockpicker({
-                    twelvehour: "true"
+                    donetext: "Submit Time",
+                    twelvehour: "true",
+                    init: function () {
+                        console.log("colorpicker initiated");
+                    },
+
+                    beforeShow: function () {
+                        console.log("before show");
+                    },
+                    afterShow: function () {
+                        console.log("after show");
+                    },
+                    beforeHide: function () {
+                        console.log("before hide");
+                    },
+                    afterHide: function () {
+                        console.log("after hide");
+                    },
+                    beforeHourSelect: function () {
+                        console.log("before hour selected");
+                    },
+                    afterHourSelect: function () {
+                        console.log("after hour selected");
+                    },
+                    beforeDone: function () {
+                        console.log("before done");
+                    },
+                    afterDone: function () {
+                        console.log("after done");
+                    }
+                })
+                .find('input').change(function(){
+                    console.log(this.value);
                 });
             </script>
 
-            <button onclick="myFunction()" id="done-button">Done</button>
-            <button ng-click="hoursCalc()" id="lol">Submit</button>
-            
+            <button onclick="myFunction()">Done</button>
 
-        </modal>
-        </div>
-    
+    <button ng-click="hoursCalc()" id="lol">Submit</button>
+
+
+    </modal>
+    </div>
+
 
 </body>
+<script src="../../Scripts/jquery-1.9.1.js"></script>
 <script src='../lib/moment.min.js'></script>
 <script src='../lib/jquery.min.js'></script>
 <script src='../fullcalendar.min.js'></script>
+
 <script src="bootstrap-clockpicker.min.js"></script>
 
 
 <script src="../../Scripts/bootstrap.min.js"></script>
 <script src="Scripts/angularjs.1.3.15/content/Scripts/angular.js"></script>
+<script src="clock.js"></script>
 <script src="app.js"></script>
 
 
@@ -122,21 +160,7 @@
                 sTime24 = parseInt(sTime, 10);
         };
 
-        //if (x[6] == "P") {
-        //    var sTime24 = parseInt(sTime, 10) + 12;
-        //    var eTime24 = parseInt(eTime, 10) + 12;
-        //    var z = eTime24 - sTime24;
-        //    console.log(z, "Hours worked");
-        //};
-
-
-
-        //if (y[6] == "P") {
-        //    var eTime24 = parseInt(eTime, 10) + 12;
-        //    var z = eTime24 - sTime;
-        //    console.log(z, "Hours worked");
-        //};
-        
+     
 
         console.log(eTime24)
 
@@ -149,37 +173,5 @@
     }
 </script>
 
-
-
-<!--<script>$(document).ready(function () {
-
-    $('#calendar').fullCalendar({
-        defaultDate: '2015-02-12',
-        editable: true,
-        eventLimit: true, // allow "more" link when too many events
-        events: [
-            {
-                title: 'Click for Google',
-                url: 'gcal.html',
-                start: '2015-05-28'
-            }
-        ],
-        dayClick: function (date, jsEvent, view) {
-
-            console.log('Clicked on: ' + date.format());
-            $('#myModal').modal("show");
-
-
-            // change the day's background color just for fun
-            $(this).css('background-color', 'red');
-
-        }
-
-    });
-
-
-});
-    
-    </script>-->
 
 </html>
