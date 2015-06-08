@@ -44,73 +44,74 @@
 
 
 
-    <div ng-controller="MainCtrl" class="container">
+        <div ng-controller="MainCtrl" class="container">
 
-        <modal visible="showModal" id="myModal">
-            <div class="input-group clockpicker">
-                <input type="text" class="form-control" placeholder="Start Time" id="Start">
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-time"></span>
-                </span>
-            </div>
-            <script type="text/javascript">
-                $('.clockpicker-with-callbacks').clockpicker({
-                    donetext:"Submit Time",
-                    twelvehour: "true",
+            <modal visible="showModal" id="myModal">
+                <div class="input-group clockpicker">
+                    <input type="text" class="form-control" placeholder="Start Time" id="Start">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span><br />
+                    </span>
+                </div>
+                <script type="text/javascript">
+                    $('.clockpicker-with-callbacks').clockpicker({
+                        donetext: "Submit Time",
+                        twelvehour: "true",
 
-                });
-            </script>
-            <div class="input-group clockpicker">
-                <input type="text" class="form-control" placeholder="End Time" id="End">
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-time"></span>
-                </span>
-            </div>
-            <script type="text/javascript">
-                $('.clockpicker').clockpicker({
-                    donetext: "Submit Time",
-                    twelvehour: "true",
-                    init: function () {
-                        console.log("colorpicker initiated");
-                    },
+                    });
+                </script>
+                <br />
+                <div class="input-group clockpicker">
+                    <input type="text" class="form-control" placeholder="End Time" id="End">
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
+                </div>
+                <script type="text/javascript">
+                    $('.clockpicker').clockpicker({
+                        donetext: "Submit Time",
+                        twelvehour: "true",
+                        init: function () {
+                            console.log("colorpicker initiated");
+                        },
 
-                    beforeShow: function () {
-                        console.log("before show");
-                    },
-                    afterShow: function () {
-                        console.log("after show");
-                    },
-                    beforeHide: function () {
-                        console.log("before hide");
-                    },
-                    afterHide: function () {
-                        console.log("after hide");
-                    },
-                    beforeHourSelect: function () {
-                        console.log("before hour selected");
-                    },
-                    afterHourSelect: function () {
-                        console.log("after hour selected");
-                    },
-                    beforeDone: function () {
-                        console.log("before done");
-                    },
-                    afterDone: function () {
-                        console.log("after done");
-                    }
-                })
-                .find('input').change(function(){
-                    console.log(this.value);
-                });
-            </script>
-
-            
-
-    <button ng-click="hoursCalc()" id="lol">Submit</button>
+                        beforeShow: function () {
+                            console.log("before show");
+                        },
+                        afterShow: function () {
+                            console.log("after show");
+                        },
+                        beforeHide: function () {
+                            console.log("before hide");
+                        },
+                        afterHide: function () {
+                            console.log("after hide");
+                        },
+                        beforeHourSelect: function () {
+                            console.log("before hour selected");
+                        },
+                        afterHourSelect: function () {
+                            console.log("after hour selected");
+                        },
+                        beforeDone: function () {
+                            console.log("before done");
+                        },
+                        afterDone: function () {
+                            console.log("after done");
+                        }
+                    })
+                    .find('input').change(function () {
+                        console.log(this.value);
+                    });
+                </script>
 
 
-    </modal>
-    </div>
+                <br />
+                <button ng-click="hoursCalc()" class="btn btn-success">Submit</button>
+
+
+            </modal>
+        </div>
 
 
 </body>

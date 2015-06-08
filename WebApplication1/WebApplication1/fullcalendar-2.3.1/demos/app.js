@@ -172,7 +172,8 @@ mymodal.directive('fullCalendar', function () {
 
 });
 
-
+var hoursArray = new Array();
+var minutesArray = new Array();
 
 mymodal.factory("CalendarFactory", function () {
 
@@ -200,7 +201,9 @@ mymodal.factory("CalendarFactory", function () {
         console.log(date1, "Date one");
         console.log(date2, "Date two");
 
-        days_between(date1, date2);
+        console.log("Days Between****************")
+
+        //var days = parseInt(days_between(date1, date2));
 
         var test = startT;
         console.log(test, "this is test")
@@ -317,10 +320,21 @@ mymodal.factory("CalendarFactory", function () {
             hours -= 1;
         }
 
-        total = minutes;
+        //total = minutes;
 
         console.log("HOURS: ", hours);
-        console.log("MINUTES: ", total);
+        console.log("MINUTES: ", minutes);
+
+        
+
+        hoursArray.push(hours);
+
+        console.log(hoursArray);
+
+        minutesArray.push(minutes);
+        console.log(minutesArray);
+
+
 
 
         
