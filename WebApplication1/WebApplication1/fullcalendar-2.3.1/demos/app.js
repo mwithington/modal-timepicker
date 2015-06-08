@@ -42,7 +42,10 @@ mymodal.controller('MainCtrl', function ($scope, CalendarFactory) {
 
     };
 
-   
+    $scope.hoursCalc = function () {
+        CalendarFactory.hoursCalc();
+    };
+
 
 
 });
@@ -169,6 +172,9 @@ mymodal.directive('fullCalendar', function () {
 
 
 mymodal.factory("CalendarFactory", function () {
+
+
+
     function doSubmit() {
         $('#myModal').modal('hide');
         $("#calendar").fullCalendar('renderEvent',
@@ -197,7 +203,7 @@ mymodal.factory("CalendarFactory", function () {
         console.log(test, "this is test")
     }
 
-    hoursCalc = function () {
+     function hoursCalc () {
         var x = document.getElementById("Start").value;
 
         var y = document.getElementById("End").value;
