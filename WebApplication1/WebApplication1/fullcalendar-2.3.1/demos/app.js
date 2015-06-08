@@ -139,9 +139,12 @@ mymodal.directive('fullCalendar', function () {
                     //console.log(x, "start: ");
                     console.log(btnClicked, "this is the bootan")
                                 
-                                       
+                   
+                    
+
                 },
-                unselect: function (start, end) {                    
+                unselect: function (start, end) {
+                    
                    
             }
                 
@@ -217,6 +220,9 @@ mymodal.factory("CalendarFactory", function () {
 
         var eTime24;
 
+        var sTimeMin;
+        var eTimeMin;
+
 
 
         sTime1 = x;
@@ -228,11 +234,50 @@ mymodal.factory("CalendarFactory", function () {
         var sTime = x.split(":", 1)
         console.log(eTime)
 
-        var isAM = x[5];
-        var isPM = y[5];
-        console.log(isAM)
-        console.log(isPM)
-        switch (isPM) {
+        var isXAP = x[5];
+        var isYAP = y[5];
+
+        console.log(isXAP)
+        console.log(isYAP)
+
+        if (isXAP == "P" && isYAP == "P") {
+            if (x[1] == "2") {
+                eTime24 = parseInt(eTime, 10) + 12;
+                sTime24 = parseInt(sTime, 10);
+            }
+            else {
+                eTime24 = parseInt(eTime, 10) + 12;
+                sTime24 = parseInt(sTime, 10) + 12;
+            }
+            
+        }
+
+        if (isXAP == "P" && isYAP == "A") {
+            if (x[1] == "2") {
+                eTime24 = parseInt(eTime, 10) + 12;
+                sTime24 = 0;
+            }
+            else {
+                eTime24 = parseInt(eTime, 10) + 12;
+                sTime24 = parseInt(sTime, 10);
+            }
+            
+        }
+
+        if (isXAP == "A" && isYAP == "A") {
+            eTime24 = parseInt(eTime, 10);
+            sTime24 = parseInt(sTime, 10) + 12;
+        }
+
+        if (isXAP == "A" && isYAP == "P") {
+            eTime24 = parseInt(eTime, 10) + 12;
+            sTime24 = parseInt(sTime, 10);
+        }
+
+        
+
+
+        /*switch (is) {
             case "P":
                 eTime24 = parseInt(eTime, 10) + 12;
                 break;
@@ -245,7 +290,7 @@ mymodal.factory("CalendarFactory", function () {
                 break;
             default:
                 sTime24 = parseInt(sTime, 10);
-        };
+        };*/
         console.log(eTime24);
 
         var z = eTime24 - sTime24;
