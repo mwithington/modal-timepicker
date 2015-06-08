@@ -293,15 +293,37 @@ mymodal.factory("CalendarFactory", function () {
         };*/
         console.log(eTime24);
 
-        var z = eTime24 - sTime24;
+        var hours = eTime24 - sTime24;
 
-        console.log(z);
+        console.log("Hours before minute calculation", hours);
 
         document.getElementById("Start").value = "";
         document.getElementById("End").value = "";
 
-        var d = x[3] + x[4];
-         console.log(d, "THIS IS THE D")
+        var sMinutes = parseInt(x[3] + x[4]);
+        console.log(sMinutes, "THIS IS THE START MINUTES");
+        var eMinutes = parseInt(y[3] + y[4]);
+        console.log(eMinutes, "THIS IS THE END MINUTES");
+
+        var minutes;
+        var total;
+
+        if (sMinutes < eMinutes) {
+            minutes = eMinutes - sMinutes;
+        }
+
+        if (sMinutes > eMinutes) {
+            minutes = ((eMinutes + 60) - sMinutes);
+            hours -= 1;
+        }
+
+        total = minutes;
+
+        console.log("HOURS: ", hours);
+        console.log("MINUTES: ", total);
+
+
+        
 
 
     }
