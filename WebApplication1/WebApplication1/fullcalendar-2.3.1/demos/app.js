@@ -42,7 +42,6 @@ mymodal.controller('MainCtrl', function ($scope, CalendarFactory) {
 
     };
 
-    $scope.hoursClick = factory.hoursCalc();
    
 
 
@@ -162,30 +161,7 @@ mymodal.directive('fullCalendar', function () {
 
         
 
-    
-        //$('#calendar').fullCalendar({
-        //    defaultDate: '2015-02-12',
-        //    editable: true,
-        //    eventLimit: true, // allow "more" link when too many events
-        //    events: [
-        //        {
-        //            title: 'Click for Google',
-        //            url: 'gcal.html',
-        //            start: '2015-05-28'
-        //        }
-        //    ],
-        //    dayClick: function (date, jsEvent, view) {
 
-        //        console.log('Clicked on: ' + date.format());
-        //        $('#myModal').modal("show");
-
-
-        //        // change the day's background color just for fun
-        //        $(this).css('background-color', 'red');
-
-        //    }
-
-        //});
 
 
 });
