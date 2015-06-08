@@ -300,6 +300,9 @@ mymodal.factory("CalendarFactory", function () {
         document.getElementById("Start").value = "";
         document.getElementById("End").value = "";
 
+        var d = x[3] + x[4];
+         console.log(d, "THIS IS THE D")
+
 
     }
 
