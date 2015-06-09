@@ -167,8 +167,15 @@ mymodal.directive('fullCalendar', function () {
 
 var hoursArray = new Array();
 var minutesArray = new Array();
+var days;
 
 mymodal.factory("CalendarFactory", function () {
+
+    function weekHours() {
+
+
+
+    }
 
 
 
@@ -196,7 +203,7 @@ mymodal.factory("CalendarFactory", function () {
 
         
 
-        var days = parseInt(days_between(date1, date2));
+        days = parseInt(days_between(date1, date2));
         console.log(days, "Days Between")
         var test = startT;
         console.log(test, "this is test")
