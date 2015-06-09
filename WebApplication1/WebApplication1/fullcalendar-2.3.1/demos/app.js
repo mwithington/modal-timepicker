@@ -149,13 +149,6 @@ mymodal.directive('fullCalendar', function () {
             }
                 
 
-                /*dayClick: function (date, jsEvent, view) {
-
-                    console.log('Clicked on: ' + date.format());
-                    $('#myModal').modal("show");
-                    // change the day's background color just for fun
-                    $(this).css('background-color', 'red');
-                }*/
 
             });
 
@@ -201,10 +194,10 @@ mymodal.factory("CalendarFactory", function () {
         console.log(date1, "Date one");
         console.log(date2, "Date two");
 
-        console.log("Days Between****************")
+        
 
-        //var days = parseInt(days_between(date1, date2));
-
+        var days = parseInt(days_between(date1, date2));
+        console.log(days, "Days Between")
         var test = startT;
         console.log(test, "this is test")
     }
@@ -280,20 +273,7 @@ mymodal.factory("CalendarFactory", function () {
         
 
 
-        /*switch (is) {
-            case "P":
-                eTime24 = parseInt(eTime, 10) + 12;
-                break;
-            default:
-                eTime24 = parseInt(eTime, 10);
-        };
-        switch (x[6]) {
-            case "P":
-                sTime24 = parseInt(sTime, 10) + 12;
-                break;
-            default:
-                sTime24 = parseInt(sTime, 10);
-        };*/
+        
         console.log(eTime24);
 
         var hours = eTime24 - sTime24;
