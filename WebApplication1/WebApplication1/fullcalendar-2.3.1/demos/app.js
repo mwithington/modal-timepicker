@@ -407,7 +407,7 @@ mymodal.factory("CalendarFactory", function () {
         }
 
         if (isXAP == "P" && isYAP == "A") {
-            if (h == 12) {
+            /*if (h == 12) {
                 eTime24 = parseInt(eTime, 10) + 12;
                 sTime24 = 0;
             }
@@ -415,6 +415,10 @@ mymodal.factory("CalendarFactory", function () {
                 eTime24 = parseInt(eTime, 10) + 12;
                 sTime24 = parseInt(sTime, 10);
             }
+            hours = eTime24 - sTime24;*/
+
+            eTime24 = parseInt(eTime, 10) + 12;
+            sTime24 = parseInt(sTime, 10);
             hours = eTime24 - sTime24;
 
         }
