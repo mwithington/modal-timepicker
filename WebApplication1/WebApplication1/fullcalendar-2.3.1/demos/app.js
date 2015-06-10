@@ -262,6 +262,8 @@ mymodal.directive('fullCalendar', function () {
 var hoursArray = new Array();
 var minutesArray = new Array();
 var days; 000
+var hours;
+
 
 mymodal.factory("CalendarFactory", function () {
 
@@ -338,9 +340,14 @@ mymodal.factory("CalendarFactory", function () {
 
 
         btnClicked = true;
-        var sTime24;
+        
+        
 
-        var eTime24;
+        
+        var sTime24 = parseInt(sTime, 10);
+
+        var eTime24 = parseInt(sTime, 10);
+
 
         var sTimeMin;
         var eTimeMin;
@@ -359,23 +366,48 @@ mymodal.factory("CalendarFactory", function () {
         var isXAP = x[5];
         var isYAP = y[5];
 
+        var h = parseInt((x[0] + x[1]));
+        var h2 = parseInt((y[0] + y[1]));
+        //var twelve = x[0] + x[1];
+
         console.log(isXAP)
         console.log(isYAP)
+        console.log("the hour ", h);
+        console.log("The other hour ", h2);
 
-        if (isXAP == "P" && isYAP == "P") {
-            if (x[1] == "2") {
-                eTime24 = parseInt(eTime, 10) + 12;
-                sTime24 = parseInt(sTime, 10);
-            }
-            else {
-                eTime24 = parseInt(eTime, 10) + 12;
-                sTime24 = parseInt(sTime, 10) + 12;
-            }
+        // 12:00pm - 2:00pm
+        
+        if ((isXAP == "P") && (isYAP == "P") && (h == 12)) {
 
+            eTime24 = parseInt(eTime, 10) + 12;
+            console.log("This should equal 14", eTime24);
+            sTime24 = parseInt(sTime, 10);
+            console.log("This should equal 12", sTime24);
+            hours = eTime24 - sTime24;
+            console.log("This should equal 2", hours);
+            
+        }
+
+        // 8:00pm - 7:00pm
+        if ((isXAP == "P") && (isYAP == "P") && (h > h2) && (h != 12)){
+
+            eTime24 = parseInt(eTime, 10);
+            sTime24 = parseInt(sTime, 10);
+            hours = (eTime24 - sTime24) + 24;
+
+        }
+        
+        // 2:00pm - 6:00pm
+        if ((isXAP == "P" && isYAP == "P") && (h < h2)) {
+            
+            eTime24 = parseInt(eTime, 10);
+            sTime24 = parseInt(sTime, 10);
+            hours = eTime24 - sTime24;
+      
         }
 
         if (isXAP == "P" && isYAP == "A") {
-            if (x[1] == "2") {
+            if (h == 12) {
                 eTime24 = parseInt(eTime, 10) + 12;
                 sTime24 = 0;
             }
@@ -383,32 +415,48 @@ mymodal.factory("CalendarFactory", function () {
                 eTime24 = parseInt(eTime, 10) + 12;
                 sTime24 = parseInt(sTime, 10);
             }
+            hours = eTime24 - sTime24;
 
         }
 
-        if (isXAP == "A" && isYAP == "A") {
+        if ((isXAP == "A" && isYAP == "A") && (h < h2)) {
             
             eTime24 = parseInt(eTime, 10);
             sTime24 = parseInt(sTime, 10);
+            hours = eTime24 - sTime24;
 
-            /*if (sTime24 > eTime24) {
-                sTime24 += 12;
-            }*/
-            
+        }
+        
+        if ((isXAP == "A" && isYAP == "A") && (h > h2) && (h == 12)) {
+
+            eTime24 = parseInt(eTime, 10);
+            sTime24 = parseInt(sTime, 10);
+            hours = eTime24;
+
+        }
+
+        if ((isXAP == "A" && isYAP == "A") && (h > h2) && (h != 12)) {
+
+            eTime24 = parseInt(eTime, 10);
+            sTime24 = parseInt(sTime, 10);
+            hours = (eTime24 - sTime24) + 24;
+
         }
 
         if (isXAP == "A" && isYAP == "P") {
             eTime24 = parseInt(eTime, 10) + 12;
             sTime24 = parseInt(sTime, 10);
+            hours = eTime24 - sTime24;
         }
 
 
 
 
 
-        console.log(eTime24);
+        console.log("Start Time: ", sTime24);
+        console.log("End Time: ", eTime24);
 
-        var hours = eTime24 - sTime24;
+        //var hours = eTime24 - sTime24;
 
         console.log("Hours before minute calculation", hours);
 
