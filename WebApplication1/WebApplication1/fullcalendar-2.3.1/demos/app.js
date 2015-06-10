@@ -43,7 +43,7 @@ mymodal.controller('MainCtrl', function ($scope, CalendarFactory) {
     };
 
     $scope.hoursCalc = function () {
-        CalendarFactory.hoursCalc();
+        CalendarFactory.assignEvent();
     };
 
     $scope.removeEvent = function () {
@@ -51,7 +51,8 @@ mymodal.controller('MainCtrl', function ($scope, CalendarFactory) {
     };
 
     $scope.editTimes = function () {
-        CalendarFactory.editTimes();
+        CalendarFactory.assignEdit();
+        $('#myModal2').modal("hide");
     }
 
 
@@ -88,7 +89,7 @@ mymodal.directive('modal1', function () {
                 scope.$apply(function () {
                     scope.$parent[attrs.visible] = false;
                 });
-            });
+             });
         }
     };
 
@@ -260,9 +261,21 @@ var days; 000
 
 mymodal.factory("CalendarFactory", function () {
 
-    function weekHours() {
+    function assignEvent() {
+        var x = document.getElementById("Start").value;
+
+        var y = document.getElementById("End").value;
+        hoursCalc(x, y);
+
+    }
 
 
+
+    function assignEdit() {
+        var x = document.getElementById("editStart").value;
+
+        var y = document.getElementById("editEnd").value;
+        editTimes(x, y);
 
     }
 
@@ -271,9 +284,9 @@ mymodal.factory("CalendarFactory", function () {
         $('#calendar').fullCalendar('removeEvents');
     }
 
-    function editTimes() {
+    function editTimes(x, y) {
         $('#calendar').fullCalendar('removeEvents');
-        hoursCalc();
+        hoursCalc(x,y);
         console.log("moving to calculate hours function");
     }
 
@@ -309,10 +322,8 @@ mymodal.factory("CalendarFactory", function () {
         console.log(test, "this is test")
     }
 
-    function hoursCalc() {
-        var x = document.getElementById("Start").value;
-
-        var y = document.getElementById("End").value;
+    function hoursCalc(x,y) {
+      
         title = x + '-' + y
 
         doSubmit();
@@ -430,7 +441,8 @@ mymodal.factory("CalendarFactory", function () {
     }
 
     var factory = {
-
+        assignEvent: assignEvent,
+        assignEdit:assignEdit,
         doSubmit: doSubmit,
         hoursCalc: hoursCalc,
         removeEvent: removeEvent,
