@@ -53,7 +53,11 @@ mymodal.controller('MainCtrl', function ($scope, CalendarFactory) {
     $scope.editTimes = function () {
         CalendarFactory.assignEdit();
         $('#myModal2').modal("hide");
-    }
+    };
+
+    $scope.addAllHours = function(){
+        CalendarFactory.addAllHours();
+    };
 
 
 
@@ -282,10 +286,14 @@ mymodal.factory("CalendarFactory", function () {
     function removeEvent() {
         $('#myModal2').modal('hide');
         $('#calendar').fullCalendar('removeEvents');
+        hoursArray.pop();
+        minutesArray.pop();
     }
 
     function editTimes(x, y) {
         $('#calendar').fullCalendar('removeEvents');
+        hoursArray.pop();
+        minutesArray.pop();
         hoursCalc(x,y);
         console.log("moving to calculate hours function");
     }
@@ -379,8 +387,14 @@ mymodal.factory("CalendarFactory", function () {
         }
 
         if (isXAP == "A" && isYAP == "A") {
+            
             eTime24 = parseInt(eTime, 10);
-            sTime24 = parseInt(sTime, 10) + 12;
+            sTime24 = parseInt(sTime, 10);
+
+            /*if (sTime24 > eTime24) {
+                sTime24 += 12;
+            }*/
+            
         }
 
         if (isXAP == "A" && isYAP == "P") {
@@ -398,8 +412,8 @@ mymodal.factory("CalendarFactory", function () {
 
         console.log("Hours before minute calculation", hours);
 
-        document.getElementById("Start").value = "";
-        document.getElementById("End").value = "";
+        //document.getElementById("Start").value = "";
+        //document.getElementById("End").value = "";
 
         var sMinutes = parseInt(x[3] + x[4]);
         console.log(sMinutes, "THIS IS THE START MINUTES");
@@ -418,18 +432,22 @@ mymodal.factory("CalendarFactory", function () {
             hours -= 1;
         }
 
-        //total = minutes;
+        if (isNaN(minutes)) {
+            minutes = 0;
+        }
 
         console.log("HOURS: ", hours);
         console.log("MINUTES: ", minutes);
 
 
 
-        hoursArray.push(hours);
+        hoursArray.push(hours*days);
 
         console.log(hoursArray);
 
-        minutesArray.push(minutes);
+
+
+        minutesArray.push(minutes*days);
         console.log(minutesArray);
 
 
@@ -440,13 +458,30 @@ mymodal.factory("CalendarFactory", function () {
 
     }
 
+    function addAllHours() {
+        console.log("in add all hours function");
+        var totalHours = 0;
+        $.each(hoursArray, function () {
+            totalHours += this;
+        });
+
+        var totalMinutes = 0;
+        $.each(minutesArray, function () {
+            totalMinutes += this;
+        });
+
+        alert("Total Hours: " + totalHours + " Total Minutes: " + totalMinutes);
+
+    }
+
     var factory = {
         assignEvent: assignEvent,
         assignEdit:assignEdit,
         doSubmit: doSubmit,
         hoursCalc: hoursCalc,
         removeEvent: removeEvent,
-        editTimes: editTimes
+        editTimes: editTimes,
+        addAllHours: addAllHours
 
     }
 
