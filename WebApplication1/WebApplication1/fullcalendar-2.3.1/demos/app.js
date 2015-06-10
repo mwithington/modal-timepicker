@@ -240,6 +240,18 @@ mymodal.directive('fullCalendar', function () {
 
                 },
 
+                eventRender: function(event, element) {
+                    element.append( "<span class='closeon'>X</span>" );
+                    element.find(".closeon").click(function() {
+                        $('#calendar').fullCalendar('removeEvents', event._id);
+                        hoursArray.splice(i,1);
+                        minutesArray.splice(i,1);
+                        console.log(hoursArray);
+                        console.log(minutesArray);
+                    });
+                    
+                },
+
 
 
 
@@ -264,6 +276,8 @@ var minutesArray = new Array();
 var days; 000
 var hours;
 
+var i;
+
 
 mymodal.factory("CalendarFactory", function () {
 
@@ -287,15 +301,20 @@ mymodal.factory("CalendarFactory", function () {
 
     function removeEvent() {
         $('#myModal2').modal('hide');
+
+                  
+        
         $('#calendar').fullCalendar('removeEvents');
-        hoursArray.pop();
-        minutesArray.pop();
+        
+    
+        hoursArray.length = 0;
+        minutesArray.length = 0;
     }
 
     function editTimes(x, y) {
-        $('#calendar').fullCalendar('removeEvents');
-        hoursArray.pop();
-        minutesArray.pop();
+        //$('#calendar').fullCalendar('removeEvents');
+        hoursArray.splice(i,1);
+        minutesArray.splice(i,1);
         hoursCalc(x,y);
         console.log("moving to calculate hours function");
     }
@@ -306,13 +325,15 @@ mymodal.factory("CalendarFactory", function () {
         $('#myModal1').modal('hide');
         $("#calendar").fullCalendar('renderEvent',
             {
-
                 title: title,
                 start: startT,
                 end: endT,
                 allday: true,
             },
             true);
+        i = 0;
+        i += 1;
+
 
 
         console.log(startT, "statt date");
@@ -405,6 +426,8 @@ mymodal.factory("CalendarFactory", function () {
             hours = eTime24 - sTime24;
       
         }
+
+
 
         if (isXAP == "P" && isYAP == "A") {
             /*if (h == 12) {
