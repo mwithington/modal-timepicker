@@ -1,35 +1,33 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta charset='utf-8' />
-<link href='../fullcalendar.css' rel='stylesheet' />
-<link href='../fullcalendar.print.css' rel='stylesheet' media='print' />
-<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-<link href="bootstrap-clockpicker.min.css" rel="stylesheet" />
+    <meta charset='utf-8' />
+    <link href='../fullcalendar.css' rel='stylesheet' />
+    <link href='../fullcalendar.print.css' rel='stylesheet' media='print' />
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link href="bootstrap-clockpicker.min.css" rel="stylesheet" />
 
-<link href="userOptionsModal.html" />
-<link href="Scripts/bootstrap.min.css" rel="stylesheet" />
-<link href="Scripts/buttonStyles.css" rel="stylesheet" />
-
-
+    <link href="userOptionsModal.html" />
+    <link href="Scripts/bootstrap.min.css" rel="stylesheet" />
+    <link href="Scripts/buttonStyles.css" rel="stylesheet" />
 
 
 
-<style>
 
-	body {
-		margin: 40px 10px;
-		padding: 0;
-		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-		font-size: 14px;
-	}
 
-	#calendar {
-		max-width: 900px;
-		margin: 0 auto;
-	}
+    <style>
+        body {
+            margin: 40px 10px;
+            padding: 0;
+            font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+            font-size: 14px;
+        }
 
-</style>
+        #calendar {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body ng-app="mymodal">
 
@@ -44,30 +42,30 @@
 
 
 
-        <div ng-controller="MainCtrl" class="container">
+    <div ng-controller="MainCtrl" class="container">
 
-            <modal visible="showModal" id="myModal1">
-                <div class="input-group clockpicker">
-                    <input type="text" class="form-control" placeholder="Start Time" id="Start">
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-time"></span><br />
-                    </span>
-                </div>
-                <script type="text/javascript">
+        <modal1 visible="showModal" id="myModal1">
+            <div class="input-group clockpicker">
+                <input type="text" class="form-control" placeholder="Start Time" id="Start">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span><br />
+                </span>
+            </div>
+            <script type="text/javascript">
                     $('.clockpicker-with-callbacks').clockpicker({
                         donetext: "Submit Time",
                         twelvehour: "true",
 
                     });
-                </script>
-                <br />
-                <div class="input-group clockpicker">
-                    <input type="text" class="form-control" placeholder="End Time" id="End">
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-time"></span>
-                    </span>
-                </div>
-                <script type="text/javascript">
+            </script>
+            <br />
+            <div class="input-group clockpicker">
+                <input type="text" class="form-control" placeholder="End Time" id="End">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-time"></span>
+                </span>
+            </div>
+            <script type="text/javascript">
                     $('.clockpicker').clockpicker({
                         donetext: "Submit Time",
                         twelvehour: "true",
@@ -103,17 +101,21 @@
                     .find('input').change(function () {
                         console.log(this.value);
                     });
-                </script>
+            </script>
 
 
-                <br />
-                <button ng-click="hoursCalc()" class="btn btn-success">Submit</button>
-            </modal>
-        </div>
+            <br />
+            <button ng-click="hoursCalc()" class="btn btn-success">Submit</button>
+        </modal1>
+
+
+
+
+    </div>
+
 
     <div ng-controller="MainCtrl" class="container">
-
-        <modal visible="showModal" id="myModal">
+        <modal2 visible="showModal" id="myModal2">
             <div class="input-group clockpicker">
                 <input type="text" class="form-control" placeholder="Start Time" id="Start">
                 <span class="input-group-addon">
@@ -174,16 +176,22 @@
 
 
             <br />
-            <button ng-click="hoursCalc()" class="btn btn-success">Submit</button>
-            <button ng-click="hoursCalc()" class="btn btn-success">Submit</button>
-            <button ng-click="hoursCalc()" class="btn btn-success">Submit</button>
-            <button ng-click="hoursCalc()" class="btn btn-success">Submit</button>
-        </modal>
+            <!--<button ng-click="hoursCalc()" class="btn btn-success">Submit</button>-->
+            <button ng-click="removeEvent()" class="btn btn-danger">Delete</button>
+            <button ng-click="editTimes()" class="btn btn-success">Edit</button>
+        </modal2>
     </div>
 
+    <script>
+        function removeEvent() {
+            $('#myModal1').modal('hide');
+            $('#calendar').fullCalendar('removeEvents');
+        }
 
+        function editTimes() {
 
-
+        }
+    </script>
 
 </body>
 <script src="../../Scripts/jquery-1.9.1.js"></script>
@@ -204,6 +212,10 @@
 
 
 </html>
+
+
+
+
 
 
 

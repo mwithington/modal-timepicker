@@ -33,7 +33,7 @@ function days_between(date1, date2) {
 
 mymodal.controller('MainCtrl', function ($scope, CalendarFactory) {
     $scope.showModal = false;
-    
+
     $scope.buttonClicked = "";
     $scope.toggleModal = function (btnClicked) {
         $scope.buttonClicked = btnClicked;
@@ -46,6 +46,14 @@ mymodal.controller('MainCtrl', function ($scope, CalendarFactory) {
         CalendarFactory.hoursCalc();
     };
 
+    $scope.removeEvent = function () {
+        CalendarFactory.removeEvent();
+    };
+
+    $scope.editTimes = function () {
+        CalendarFactory.editTimes();
+    }
+
 
 
 });
@@ -55,9 +63,74 @@ mymodal.controller('MainCtrl', function ($scope, CalendarFactory) {
 
 
 
-mymodal.directive('modal', function () {
+mymodal.directive('modal1', function () {
     return {
-        templateUrl:'userOptionsModal.html' ,
+        templateUrl: 'userOptionsModal.html',
+        restrict: 'E',
+        transclude: true,
+        replace: true,
+        scope: true,
+        link: function postLink(scope, element, attrs) {
+            scope.$watch(attrs.visible, function (value) {
+                if (value == true)
+                    $(element).modal('show');
+                else
+                    $(element).modal('hide');
+            });
+
+            $(element).on('shown.bs.modal', function () {
+                scope.$apply(function () {
+                    scope.$parent[attrs.visible] = true;
+                });
+            });
+
+            $(element).on('hidden.bs.modal', function () {
+                scope.$apply(function () {
+                    scope.$parent[attrs.visible] = false;
+                });
+            });
+        }
+    };
+
+
+
+});
+mymodal.directive('modal2', function () {
+    return {
+        templateUrl: 'userOptionsModal2.html',
+        restrict: 'E',
+        transclude: true,
+        replace: true,
+        scope: true,
+        link: function postLink(scope, element, attrs) {
+            scope.$watch(attrs.visible, function (value) {
+                if (value == true)
+                    $(element).modal('show');
+                else
+                    $(element).modal('hide');
+            });
+
+            $(element).on('shown.bs.modal', function () {
+                scope.$apply(function () {
+                    scope.$parent[attrs.visible] = true;
+                });
+            });
+
+            $(element).on('hidden.bs.modal', function () {
+                scope.$apply(function () {
+                    scope.$parent[attrs.visible] = false;
+                });
+            });
+        }
+    };
+
+
+
+});
+
+mymodal.directive('modalEvent', function () {
+    return {
+        templateUrl: 'userOptionsModal.html',
         restrict: 'E',
         transclude: true,
         replace: true,
@@ -92,7 +165,6 @@ mymodal.directive('modal', function () {
 
 
 
-
 mymodal.directive('fullCalendar', function () {
     return {
         restrict: "E",
@@ -113,11 +185,11 @@ mymodal.directive('fullCalendar', function () {
                     }
                 ],
                 selectable: true,
-                
-                
+
+
                 select: function (start, end) {
-                    console.log('Selected something: ' );
-                    var modalShow = $('#myModal').modal("show");
+                    console.log('Selected something: ');
+                    var modalShow = $('#myModal1').modal("show");
                     console.log("Hello!!!");
                     console.log(start);
                     console.log(end);
@@ -133,26 +205,38 @@ mymodal.directive('fullCalendar', function () {
                     var eventData;
 
                     endT = end;
-                    startT =start;
+                    startT = start;
 
 
                     //console.log(x, "start: ");
                     console.log(btnClicked, "this is the bootan")
-                                
-                   
-                    
+
+
+
 
                 },
                 unselect: function (start, end) {
-                    
-                   
+
+
                 },
 
-                eventClick: function(calEvent, jsEvent, view) {
-                    $('#myModal1').modal("show");
+                //eventClick: function (event) {
 
-            }
-                
+                //$('#calendar').fullCalendar('removeEvents')
+
+                eventClick: function (event, element) {
+
+                    $('#myModal2').modal("show");
+                    console.log("The modal is showing after event click");
+
+                    //event.title = "CLICKED!";
+
+                    $('#calendar').fullCalendar('updateEvent', event);
+
+                },
+
+
+
 
 
             });
@@ -160,10 +244,10 @@ mymodal.directive('fullCalendar', function () {
         },
 
     }
-         
-        
 
-        
+
+
+
 
 
 
@@ -172,7 +256,7 @@ mymodal.directive('fullCalendar', function () {
 
 var hoursArray = new Array();
 var minutesArray = new Array();
-var days;000
+var days; 000
 
 mymodal.factory("CalendarFactory", function () {
 
@@ -182,10 +266,21 @@ mymodal.factory("CalendarFactory", function () {
 
     }
 
+    function removeEvent() {
+        $('#myModal2').modal('hide');
+        $('#calendar').fullCalendar('removeEvents');
+    }
+
+    function editTimes() {
+        $('#calendar').fullCalendar('removeEvents');
+        hoursCalc();
+        console.log("moving to calculate hours function");
+    }
+
 
 
     function doSubmit() {
-        $('#myModal').modal('hide');
+        $('#myModal1').modal('hide');
         $("#calendar").fullCalendar('renderEvent',
             {
 
@@ -206,7 +301,7 @@ mymodal.factory("CalendarFactory", function () {
         console.log(date1, "Date one");
         console.log(date2, "Date two");
 
-        
+
 
         days = parseInt(days_between(date1, date2));
         console.log(days, "Days Between")
@@ -214,7 +309,7 @@ mymodal.factory("CalendarFactory", function () {
         console.log(test, "this is test")
     }
 
-     function hoursCalc () {
+    function hoursCalc() {
         var x = document.getElementById("Start").value;
 
         var y = document.getElementById("End").value;
@@ -257,7 +352,7 @@ mymodal.factory("CalendarFactory", function () {
                 eTime24 = parseInt(eTime, 10) + 12;
                 sTime24 = parseInt(sTime, 10) + 12;
             }
-            
+
         }
 
         if (isXAP == "P" && isYAP == "A") {
@@ -269,7 +364,7 @@ mymodal.factory("CalendarFactory", function () {
                 eTime24 = parseInt(eTime, 10) + 12;
                 sTime24 = parseInt(sTime, 10);
             }
-            
+
         }
 
         if (isXAP == "A" && isYAP == "A") {
@@ -282,10 +377,10 @@ mymodal.factory("CalendarFactory", function () {
             sTime24 = parseInt(sTime, 10);
         }
 
-        
 
 
-        
+
+
         console.log(eTime24);
 
         var hours = eTime24 - sTime24;
@@ -317,7 +412,7 @@ mymodal.factory("CalendarFactory", function () {
         console.log("HOURS: ", hours);
         console.log("MINUTES: ", minutes);
 
-        
+
 
         hoursArray.push(hours);
 
@@ -329,7 +424,7 @@ mymodal.factory("CalendarFactory", function () {
 
 
 
-        
+
 
 
     }
@@ -337,14 +432,15 @@ mymodal.factory("CalendarFactory", function () {
     var factory = {
 
         doSubmit: doSubmit,
-        hoursCalc: hoursCalc
+        hoursCalc: hoursCalc,
+        removeEvent: removeEvent,
+        editTimes: editTimes
+
     }
 
     return factory
-        
+
 
 
 })
-
-
 
