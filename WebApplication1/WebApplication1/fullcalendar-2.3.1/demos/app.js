@@ -514,17 +514,25 @@ mymodal.factory("CalendarFactory", function () {
         console.log("HOURS: ", hours);
         console.log("MINUTES: ", minutes);
 
+        var extraHours = Math.floor((minutes * days) / 60);
 
+        console.log(extraHours, "THIS IS X")
 
-        hoursArray.push(hours*days);
+        console.log("DUDE")
+        hoursArray.push((hours * days) + extraHours);
 
         console.log(hoursArray);
 
 
 
-        minutesArray.push(minutes*days);
-        console.log(minutesArray);
+        minutesArray.push((minutes * days) % 60);
 
+
+
+
+        console.log(117 / 60);
+
+        console.log(minutesArray);
 
 
 
