@@ -134,22 +134,6 @@ mymodal.directive('modal2', function () {
 
 });
 
-
-mymodal.directive('clockPicker', function () {
-    return {
-        restrict: 'A',
-        link: function (scope, element, attrs) {
-            $('.clockpicker').clockpicker({
-                
-            })
-            element.clockpicker({
-                donetext: "Submit Time",
-                twelvehour: "true"
-            })
-        }
-    }
-});
-
 mymodal.directive('modalEvent', function () {
     return {
         templateUrl: 'userOptionsModal.html',
@@ -507,6 +491,10 @@ mymodal.factory("CalendarFactory", function () {
             hours = eTime24 - sTime24;
         }
 
+
+
+
+
         console.log("Start Time: ", sTime24);
         console.log("End Time: ", eTime24);
 
@@ -560,6 +548,12 @@ mymodal.factory("CalendarFactory", function () {
         console.log(117 / 60);
 
         console.log(minutesArray);
+
+
+
+
+
+
     }
 
     function addAllHours() {
