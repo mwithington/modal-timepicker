@@ -40,8 +40,11 @@
 
     </div>
     <div ng-controller="MainCtrl" class="container">
-        <button class="btn btn-success" ng-click="addAllHours()">Add Up Hours</button>
-        <button class="btn btn-danger" ng-click="removeEvent()">Delete ALL Times</button>
+        <h2>Options</h2>
+        <ul>
+            <li><button class="btn btn-success" ng-click="addAllHours()">Add Up Hours</button></li>
+            <li><button class="btn btn-danger" ng-click="removeEvent()">Delete ALL Times</button></li>
+        </ul>
     </div>
 
 
@@ -129,7 +132,7 @@
                         <span class="glyphicon glyphicon-time"></span><br />
                     </span>
                 </div>
-                <clockPicker></clockPicker>
+                <clock-picker></clock-picker>
                 <br />
                 <div class="input-group clockpicker">
                     <input type="text" class="form-control" placeholder="End Time" id="editEnd">
@@ -137,7 +140,7 @@
                         <span class="glyphicon glyphicon-time"></span>
                     </span>
                 </div>
-                <clockPicker></clockPicker>
+                <clock-picker></clock-picker>
 
 
                 <br />

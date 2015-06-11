@@ -1060,3 +1060,30 @@ be a descendant of the grid when it is being dragged.
 .fc-time-grid-event .fc-resizer:after {
 	content: "=";
 }
+
+
+/********************MESSING AROUND*******************************/
+article{
+    //height: 200px;
+    //overflow: auto;
+    //margin-right: 20%;
+    //float: right
+}
+
+ul{
+    list-style-type: none;
+}
+li{
+    padding: .5em;
+}
+
+/*****************     aside section              *****************************/
+aside {
+    padding: 10em;
+    width: 50%;
+    
+}
+aside h2, aside p{
+    text-align: left;
+    //padding: .2em 8.48056537% .2em 8.48056537%; /* 48px / 566px */
+}
