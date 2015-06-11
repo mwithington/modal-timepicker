@@ -134,6 +134,18 @@ mymodal.directive('modal2', function () {
 
 });
 
+mymodal.directive('clockPicker', function () {
+    return {
+        restrict: 'E',
+        link: function (scope, element, attrs) {
+            $('.clockpicker').clockpicker({
+                donetext: "Submit Time",
+                twelvehour: "true"
+            })
+        }
+    }
+});
+
 mymodal.directive('modalEvent', function () {
     return {
         templateUrl: 'userOptionsModal.html',
