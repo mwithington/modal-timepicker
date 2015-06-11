@@ -6,6 +6,7 @@ var title;
 
 var startT;
 var endT;
+var shift_id;
 
 
 function days_between(date1, date2) {
@@ -225,8 +226,11 @@ mymodal.directive('fullCalendar', function () {
 
                     var eventData;
 
+                    
+
                     endT = end;
                     startT = start;
+                    shift_id = id;
 
 
                     //console.log(x, "start: ");
@@ -251,6 +255,7 @@ mymodal.directive('fullCalendar', function () {
                     console.log("The modal is showing after event click");
 
                     //event.title = "CLICKED!";
+                    //console.log("ID", calEvent.shift_id);
 
                     $('#calendar').fullCalendar('updateEvent', event);
 
@@ -260,8 +265,8 @@ mymodal.directive('fullCalendar', function () {
                     element.append( "<span class='closeon'>X</span>" );
                     element.find(".closeon").click(function() {
                         $('#calendar').fullCalendar('removeEvents', event._id);
-                        hoursArray.splice(i,1);
-                        minutesArray.splice(i,1);
+                        hoursArray[id] = 0;
+                        minutesArray[id] = 0;
                         console.log(hoursArray);
                         console.log(minutesArray);
                     });
@@ -292,7 +297,7 @@ var minutesArray = new Array();
 var days; 000
 var hours;
 
-var i;
+var id = 0;
 
 
 mymodal.factory("CalendarFactory", function () {
@@ -339,21 +344,30 @@ mymodal.factory("CalendarFactory", function () {
 
     function doSubmit() {
         $('#myModal1').modal('hide');
+        id++;
         $("#calendar").fullCalendar('renderEvent',
             {
+                id: id,
                 title: title,
                 start: startT,
                 end: endT,
                 allday: true,
             },
             true);
-        i = 0;
-        i += 1;
 
+        
 
+        //$(element).attr("id","event_id_"+event._id);
+        
+        //i = 0;
+        //i += 1;
+        console.log("IDHELLLOOOOO");
+        console.log(id, "ID");
 
         console.log(startT, "statt date");
         console.log(endT, "endt date");
+
+        
 
         var date1 = new Date(startT.format());
         var date2 = new Date(endT.format());
@@ -372,6 +386,7 @@ mymodal.factory("CalendarFactory", function () {
     function hoursCalc(x,y) {
       
         title = x + '-' + y
+        
 
         doSubmit();
 
