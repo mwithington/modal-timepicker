@@ -15,7 +15,18 @@ var i = 0;
 /*
  *Controller
  */
-mymodal.controller('MainCtrl', function ($scope, CalendarFactory) {
+mymodal.controller('MainCtrl', function ($scope,$http, CalendarFactory) {
+    //$scope.selectedTest = null;
+    //$scopescope.testAccounts = [];
+    //$http({
+    //    method: 'GET',
+    //    url: '/test',
+    //    data: { applicationId: 3 }
+    //}).success(function (result){
+    //    $scope.testAccounts = result;
+    //})
+
+
     $scope.showModal = false;
 
     $scope.buttonClicked = "";
@@ -40,6 +51,15 @@ mymodal.controller('MainCtrl', function ($scope, CalendarFactory) {
 
     $scope.addAllHours = function(){
         CalendarFactory.addAllHours();
+    };
+
+    $scope.showOptions = function () {
+        CalendarFactory.showOptions();
+    };
+
+    $scope.saveOptions = function () {
+        CalendarFactory.saveOptions();
+
     };
 
 });
@@ -115,6 +135,46 @@ mymodal.directive('modal2', function () {
 
 
 });
+
+
+/*
+ *Modal3 Directive
+ */
+
+
+mymodal.directive('modal3', function () {
+    return {
+        templateUrl: 'userOptionsModal3.html',
+        restrict: 'E',
+        transclude: true,
+        replace: true,
+        scope: true,
+        link: function postLink(scope, element, attrs) {
+            scope.$watch(attrs.visible, function (value) {
+                if (value == true)
+                    $(element).modal('show');
+                else
+                    $(element).modal('hide');
+            });
+
+            $(element).on('shown.bs.modal', function () {
+                scope.$apply(function () {
+                    scope.$parent[attrs.visible] = true;
+                });
+            });
+
+            $(element).on('hidden.bs.modal', function () {
+                scope.$apply(function () {
+                    scope.$parent[attrs.visible] = false;
+                });
+            });
+        }
+    };
+
+
+
+});
+
 
 /*
  *ClockPicker Directive
@@ -226,6 +286,9 @@ function days_between(date1, date2) {
 /*
  *Factory
  */
+
+
+
 mymodal.factory("CalendarFactory", function () {
 
     function assignEvent() {
@@ -457,6 +520,20 @@ mymodal.factory("CalendarFactory", function () {
 
     }
 
+
+    function showOptions() {
+        $('#myModal3').modal('show');
+
+
+
+    }
+    function saveOptions() {
+
+        alert("Options Saved")
+        $('#myModal3').modal('hide');
+
+    }
+
     var factory = {
         assignEvent: assignEvent,
         assignEdit:assignEdit,
@@ -464,10 +541,95 @@ mymodal.factory("CalendarFactory", function () {
         hoursCalc: hoursCalc,
         removeEvent: removeEvent,
         editTimes: editTimes,
-        addAllHours: addAllHours
+        addAllHours: addAllHours,
+        saveOptions: saveOptions,
+        showOptions: showOptions
 
     }
 
     return factory
 
 })
+ 
+
+
+mymodal.controller('userCardCtrl', function ($scope) {
+    $scope.user1 = {
+        name: 'Luke Skywalker',
+        address: {
+            street: 'PO box 123',
+            city: 'Secret Rebel base',
+            planet: 'Yavin 4'
+        },
+        friends: [
+          'Han',
+          'Leia',
+          'Chewbacca'
+        ]
+    }
+    $scope.user2 = {
+        name: 'Han Solo',
+        address: {
+            street: 'PO box 123',
+            city: 'Secret Rebel base',
+            planet: 'Yavin 4'
+        },
+        friends: [
+          'Leia',
+          'Luke',
+          'Chewbacca'
+        ]
+    }
+
+    console.log($scope);
+
+});
+
+mymodal.directive('userInfoCard', function () {
+    return {
+        templateUrl: "userInfoCardEx/userInfoCard.html",
+        restrict: "E",
+        scope: {
+            user: '=',
+            initialCollapsed: '@collapsed'
+        },
+        controller: function ($scope) {
+            //$scope.collapsed = false;
+            $scope.collapsed = ($scope.initialCollapsed === 'true')
+            $scope.knightMe = function (user) {
+                user.rank = "knight";
+            }
+            $scope.collapse = function () {
+                $scope.collapsed = !$scope.collapsed;
+            }
+       
+
+        }
+
+    }
+
+
+});
+
+
+mymodal.directive('address', function () {
+    return {
+        restrict: 'E',
+        scope: true,
+        templateUrl: 'userInfoCardEx/address.html',
+        controller: function ($scope) {
+            $scope.collapsed = false;
+
+            $scope.collapseAddress = function () {
+                $scope.collapsed = true;
+            }
+            $scope.expandAddress = function () {
+                $scope.collapsed = false;
+            }
+        }
+    }
+
+
+});
+
+

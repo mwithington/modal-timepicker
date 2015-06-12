@@ -6,15 +6,12 @@
     <link href='../fullcalendar.print.css' rel='stylesheet' media='print' />
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link href="bootstrap-clockpicker.min.css" rel="stylesheet" />
+    <link href="userInfoCardEx/address.html"/>
+    <link href="userInfoCardEx/userInfoCard.html"/>
 
     <link href="userOptionsModal.html" />
     <link href="Scripts/bootstrap.min.css" rel="stylesheet" />
     <link href="Scripts/buttonStyles.css" rel="stylesheet" />
-
-
-
-
-
     <style>
         body {
             margin: 40px 10px;
@@ -44,11 +41,9 @@
         <ul>
             <li><button class="btn btn-success" ng-click="addAllHours()">Add Up Hours</button></li>
             <li><button class="btn btn-danger" ng-click="removeEvent()">Delete ALL Times</button></li>
+            <li><button class="btn btn-primary glyphicon glyphicon-cog" ng-click="showOptions()"></button></li>
         </ul>
     </div>
-
-
-
 
         <div ng-controller="MainCtrl" class="container">
 
@@ -68,14 +63,9 @@
                     </span>
                 </div>
                 <clock-picker></clock-picker>
-
-
                 <br />
                 <button ng-click="hoursCalc()" class="btn btn-success">Submit</button>
             </modal1>
-
-
-
 
         </div>
 
@@ -95,6 +85,7 @@
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-time"></span>
                     </span>
+                    
                 </div>
                 <clock-picker></clock-picker>
 
@@ -104,17 +95,30 @@
                 <button ng-click="editTimes()" class="btn btn-success">Edit</button>
             </modal2>
         </div>
+    <div ng-controller="MainCtrl" class="container">
+        <modal3 visible ="showModal" id="myModal3">
+            <select>
+                <option value="Event color">Select Work Group Here</option>
+                <option value="red">Red</option>
+                <option value="blue">Blue</option>
+                <option value="green">Green</option>
+            </select>
 
-        <script>
-            function removeEvent() {
-                $('#myModal1').modal('hide');
-                $('#calendar').fullCalendar('removeEvents');
-            }
+            <button class="btn btn-success" ng-click="saveOptions()">Save</button>
+            
+        </modal3>
+            
 
-            function editTimes() {
+</div>
 
-            }
-        </script>
+    <div ng-controller="userCardCtrl" class="container" style="padding-top:30px">
+        <user-info-card collapsed="true">
+
+        </user-info-card>
+        
+    </div>
+
+       
 
 </body>
 <script src="../../Scripts/jquery-1.9.1.js"></script>
