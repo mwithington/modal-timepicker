@@ -45,31 +45,64 @@
         </ul>
     </div>
 
-        <div ng-controller="MainCtrl" class="container">
+    <!--MODAL 1-->
+    
+    <div ng-controller="MainCtrl" class="container">
 
-            <modal1 visible="showModal" id="myModal1">
-                <div class="input-group clockpicker">
-                    <input type="text" class="form-control" placeholder="Start Time" id="Start">
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-time"></span><br />
-                    </span>
+        <modal1 id="myModal1">
+            <form data-toggle="validator" role="form" id="form">
+                <div class="form-group">
+                    <div class="input-group clockpicker">
+                        <input type="text" pattern="^((([0]?[1-9]|1[0-2])(:|\.)[0-5][0-9]((:|\.)[0-5][0-9])?()?(AM|am|aM|Am|PM|pm|pM|Pm)))$"
+                               class="form-control" data-error="The time should be entered in the form XX:XXAM/PM" placeholder="Start Time" id="Start" required>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-time"></span><br />
+                        </span>
+                    </div>
+
+                    <clock-picker></clock-picker>
+                    <div class="help-block with-errors"></div>
                 </div>
-                <clock-picker></clock-picker>
+
                 <br />
-                <div class="input-group clockpicker">
-                    <input type="text" class="form-control" placeholder="End Time" id="End">
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-time"></span>
-                    </span>
+
+                <div class="form-group">
+                    <div class="input-group clockpicker">
+                        <input type="text" pattern="^((([0]?[1-9]|1[0-2])(:|\.)[0-5][0-9]((:|\.)[0-5][0-9])?()?(AM|am|aM|Am|PM|pm|pM|Pm)))$"
+                               class="form-control" data-error="The time should be entered in the form XX:XXAM/PM"
+                               placeholder="End Time" id="End" required>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-time"></span>
+                        </span>
+                    </div>
+
+                    <clock-picker></clock-picker>
+                    <div class="help-block with-errors"></div>
                 </div>
-                <clock-picker></clock-picker>
+
                 <br />
-                <button ng-click="hoursCalc()" class="btn btn-success">Submit</button>
-            </modal1>
 
-        </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">check</button>
+                    <button type="submit" ng-click="hoursCalc()" class="btn btn-success" id="submitHours">Submit</button>
+                    <!--<script>
+                            $('#form').validator().on('submit', function (e) {
+                                if (e.isDefaultPrevented()) {
+                                    //$('#submitHours').removeAttr('ng-click');
+                                    // handle the invalid form...
+                                    alert("nothin aint gud");
+                                } else {
+                                    alert("Errythin is gud");//$('#submitHours').attr('ng-click',"hoursCalc()");
+                                }
+                            })
+                    </script>-->
+                </div>
+            </form>
+        </modal1>
 
+    </div>
 
+    <!--MODAL 2-->
         <div ng-controller="MainCtrl" class="container">
             <modal2 visible="showModal" id="myModal2">
                 <div class="input-group clockpicker">

@@ -393,7 +393,7 @@ mymodal.factory("CalendarFactory", function () {
         console.log("The other hour ", h2);
 
         // 12:00pm - 2:00pm
-        if ((isXAP == "P") && (isYAP == "P") && (h == 12)) {
+        if (((isXAP == "P") || (isXAP == "p")) && ((isYAP == "P") || (isYAP == "p")) && (h == 12)) {
 
             eTime24 = parseInt(eTime, 10) + 12;
             console.log("This should equal 14", eTime24);
@@ -401,44 +401,44 @@ mymodal.factory("CalendarFactory", function () {
             console.log("This should equal 12", sTime24);
             hours = eTime24 - sTime24;
             console.log("This should equal 2", hours);
-   
+
         }
 
         // 8:00pm - 7:00pm
-        if ((isXAP == "P") && (isYAP == "P") && (h > h2) && (h != 12)){
+        if (((isXAP == "P") || (isXAP == "p")) && ((isYAP == "P") || (isYAP == "p")) && (h > h2) && (h != 12)) {
 
             eTime24 = parseInt(eTime, 10);
             sTime24 = parseInt(sTime, 10);
             hours = (eTime24 - sTime24) + 24;
 
         }
-        
+
         // 2:00pm - 6:00pm
-        if ((isXAP == "P" && isYAP == "P") && (h < h2)) {
-            
+        if (((isXAP == "P") || (isXAP == "p")) && ((isYAP == "P") || (isYAP == "p")) && (h < h2)) {
+
             eTime24 = parseInt(eTime, 10);
             sTime24 = parseInt(sTime, 10);
             hours = eTime24 - sTime24;
-      
+
         }
 
-        if (isXAP == "P" && isYAP == "A") {
-            
+        if (((isXAP == "P") || (isXAP == "p")) && ((isYAP == "A") || (isYAP == "a"))) {
+
             eTime24 = parseInt(eTime, 10) + 12;
             sTime24 = parseInt(sTime, 10);
             hours = eTime24 - sTime24;
 
         }
 
-        if ((isXAP == "A" && isYAP == "A") && (h < h2)) {
-            
+        if (((isXAP == "A") || (isXAP == "a")) && ((isYAP == "A") || (isYAP == "a")) && (h < h2)) {
+
             eTime24 = parseInt(eTime, 10);
             sTime24 = parseInt(sTime, 10);
             hours = eTime24 - sTime24;
 
         }
-        
-        if ((isXAP == "A" && isYAP == "A") && (h > h2) && (h == 12)) {
+
+        if (((isXAP == "A") || (isXAP == "a")) && ((isYAP == "A") || (isYAP == "a")) && (h > h2) && (h == 12)) {
 
             eTime24 = parseInt(eTime, 10);
             sTime24 = parseInt(sTime, 10);
@@ -446,7 +446,7 @@ mymodal.factory("CalendarFactory", function () {
 
         }
 
-        if ((isXAP == "A" && isYAP == "A") && (h > h2) && (h != 12)) {
+        if (((isXAP == "A") || (isXAP == "a")) && ((isYAP == "A") || (isYAP == "a")) && (h > h2) && (h != 12)) {
 
             eTime24 = parseInt(eTime, 10);
             sTime24 = parseInt(sTime, 10);
@@ -454,7 +454,7 @@ mymodal.factory("CalendarFactory", function () {
 
         }
 
-        if (isXAP == "A" && isYAP == "P") {
+        if (((isXAP == "A") || (isXAP == "a")) && ((isYAP == "P") || (isYAP == "p"))) {
             eTime24 = parseInt(eTime, 10) + 12;
             sTime24 = parseInt(sTime, 10);
             hours = eTime24 - sTime24;
