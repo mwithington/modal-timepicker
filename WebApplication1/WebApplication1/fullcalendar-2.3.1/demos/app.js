@@ -25,7 +25,7 @@ mymodal.controller('MainCtrl', function ($scope,$http, CalendarFactory) {
     //}).success(function (result){
     //    $scope.testAccounts = result;
     //})
-
+    
 
     $scope.showModal = false;
 
