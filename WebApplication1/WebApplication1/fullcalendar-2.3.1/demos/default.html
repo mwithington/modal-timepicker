@@ -34,6 +34,7 @@
 <body ng-app="mymodal">
 
     <div container ng-controller="MainCtrl">
+        
         <full-calendar ng-transclude>
             <div id="calendar"></div>
         </full-calendar>
@@ -55,15 +56,20 @@
     <div ng-controller="MainCtrl" class="container">
 
         <modal1 id="myModal1">
+            
+
+            
             <form data-toggle="validator" role="form" id="timeForm">
                 <div class="form-group">
+                    <label>Start Time</label>
                     <div class="input-group clockpicker">
-                        <label>Start Time</label>
-                        <input type="text" name="startTime" pattern="^((([0]?[1-9]|1[0-2])(:|\.)[0-5][0-9]((:|\.)[0-5][0-9])?()?(AM|am|aM|Am|PM|pm|pM|Pm)))$"
-                               class="form-control" data-error="The time should be entered in the form XX:XXAM/PM" value="12:00PM" id="Start" required>
+                        
+                        <input type="text" name="startTime" 
+                               class="form-control" ng-model="startTime" data-error="The time should be entered in the form XX:XXAM/PM"  id="Start" required pattern="^((([0]?[1-9]|1[0-2])(:|\.)[0-5][0-9]((:|\.)[0-5][0-9])?()?(AM|am|aM|Am|PM|pm|pM|Pm)))$">
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-time"></span><br />
                         </span>
+                        
                     </div>
 
                     <clock-picker></clock-picker>
@@ -73,26 +79,30 @@
                 <br />
 
                 <div class="form-group">
+                    <label>End Time</label>
                     <div class="input-group clockpicker">
-                        <label>End Time</label>
-                        <input type="text" name="endTime" pattern="^((([0]?[1-9]|1[0-2])(:|\.)[0-5][0-9]((:|\.)[0-5][0-9])?()?(AM|am|aM|Am|PM|pm|pM|Pm)))$"
-                               class="form-control" data-error="The time should be entered in the form XX:XXAM/PM"
-                               value="12:00PM" id="End" required>
+                        
+                        <input type="text" name="endTime" 
+                               class="form-control" ng-model="End Time" data-error="The time should be entered in the form XX:XXAM/PM"
+                               id="End" required pattern="^((([0]?[1-9]|1[0-2])(:|\.)[0-5][0-9]((:|\.)[0-5][0-9])?()?(AM|am|aM|Am|PM|pm|pM|Pm)))$">
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-time"></span>
                         </span>
+                        
                     </div>
 
                     <clock-picker></clock-picker>
-                    <div class="help-block with-errors"></div>
+                    <div class="help-block with-errors"></div>                    
                 </div>
 
                 <br />
 
                 <div class="form-group">
                     <p ng-show="false">Hello</p>
-                    <button type="submit" class="btn btn-success" ng-click="hoursCalc()" id="submitHours">Submit</button>
-                    
+                    <button type="submit" class="btn btn-success" ng-click="hoursCalc()" id="submitHours" ng-disabled="true">Submit</button>
+                    <input type="submit"
+                           ng-disabled="myForm.startTime.$dirty && myForm.startTime.$invalid || myForm.endTime.$dirty && myForm.endTime.$invalid"
+                           ng-click="hoursCalc()">
                     
                     
                 </div>
@@ -101,7 +111,7 @@
 
     </div>
 
-    <!--<script>
+    <script>
         $('#timeForm').validator().on('submit', function (e) {
             if (e.isDefaultPrevented()) {
                 //$('#submitHours').removeAttr('ng-click');
@@ -111,15 +121,13 @@
             } else {
                 //document.getElementsByTagName("button")[0].setAttribute(, "democlass");
                 //document.getElementsByTagName("button")[0].setAttribute("class", "democlass");
-                $('#modal1').modal('hide');
-                hoursCalc();
                 //document.getElementById("submitHours").ng-click("hoursCalc()");
-                //document.getElementById("submitHours").setAttribute("ng-click", "hoursCalc()");
+                document.getElementById("submitHours").setAttribute("ng-disabled", "false");
                 //$('#submitHours').attr('ng-click',"hoursCalc()");
                 console.log("Form is valid")
             }
         })
-    </script>-->
+    </script>
 
     
 

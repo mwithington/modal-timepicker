@@ -12,6 +12,9 @@ var hours;
 var minutes;
 var i = 0;
 
+
+
+
 /*
  *Controller
  */
@@ -26,6 +29,8 @@ mymodal.controller('MainCtrl', function ($scope,$http, CalendarFactory) {
     //    $scope.testAccounts = result;
     //})
     
+    $scope.startTime = 'Start Time';
+    $scope.endTime = 'End Time';
 
     $scope.showModal = false;
 
