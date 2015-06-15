@@ -35,7 +35,7 @@
 
     <div container ng-controller="MainCtrl">
         
-        <full-calendar ng-transclude>
+        <full-calendar ng-transclude class="col-lg-10">
             <div id="calendar"></div>
         </full-calendar>
 
@@ -53,7 +53,7 @@
 
     <!--MODAL 1-->
     
-    <div ng-controller="MainCtrl" class="container">
+    <div ng-controller="MainCtrl" class="container" >
 
         <modal1 id="myModal1">
             
@@ -100,11 +100,7 @@
                 <div class="form-group">
                     <p ng-show="false">Hello</p>
                     <button type="submit" class="btn btn-success" ng-click="hoursCalc()" id="submitHours" ng-disabled="true">Submit</button>
-                    <input type="submit"
-                           ng-disabled="myForm.startTime.$dirty && myForm.startTime.$invalid || myForm.endTime.$dirty && myForm.endTime.$invalid"
-                           ng-click="hoursCalc()">
-                    
-                    
+                   
                 </div>
             </form>
         </modal1>
@@ -160,12 +156,12 @@
         </div>
     <div ng-controller="MainCtrl" class="container">
         <modal3 visible ="showModal" id="myModal3">
-            <select>
-                <option value="Event color">Select Work Group Here</option>
-                <option value="red">Red</option>
-                <option value="blue">Blue</option>
-                <option value="green">Green</option>
-            </select>
+            <div ng-controller="userCardCtrl" style="padding-top:30px">
+                <user-info-card collapsed="true">
+
+                </user-info-card>
+
+            </div>
 
             <button class="btn btn-success" ng-click="saveOptions()">Save</button>
             
@@ -174,12 +170,7 @@
 
 </div>
 
-    <div ng-controller="userCardCtrl" class="container" style="padding-top:30px">
-        <user-info-card collapsed="true">
-
-        </user-info-card>
-        
-    </div>
+  
 
        
 
