@@ -27,25 +27,45 @@
         }
     </style>
 </head>
-<body ng-app="mymodal">
-
-    <div container ng-controller="MainCtrl">
-        
-        <full-calendar ng-transclude class="col-lg-10">
-            <div id="calendar"></div>
-        </full-calendar>
-
-
-
+<body ng-app="mymodal" ng-controller="MainCtrl">
+    <header class="container">
+        <div>
+            <h1>Time Sheet</h1>
+        </div>
+    </header>
+    <div class="container">
+        <div id="menu" class="navbar navbar-default">
+            <div class="navbar-header">
+                <button class="btn btn-success navbar-toggle"
+                        data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="nav"><button class="btn btn-success" ng-click="addAllHours()">Add Up Hours</button></li>
+                    <li class="nav"><button class="btn btn-danger" ng-click="removeEvent()">Delete ALL Times</button></li>
+                    <li class="nav"><button class="btn btn-primary glyphicon glyphicon-cog" ng-click="showOptions()"></button></li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div ng-controller="MainCtrl" class="container">
-        <h2>Options</h2>
-        <ul>
-            <li><button class="btn btn-success" ng-click="addAllHours()">Add Up Hours</button></li>
-            <li><button class="btn btn-danger" ng-click="removeEvent()">Delete ALL Times</button></li>
-            <li><button class="btn btn-primary glyphicon glyphicon-cog" ng-click="showOptions()"></button></li>
-        </ul>
+
+    <div class="container">
+    <div class="alert alert-warning collapse" id="hoursAlert">
+        <a href="#" data-dismiss="alert" class="close">&times;</a>
+        <p id="alert"></p>
     </div>
+    </div>
+
+    <div class="container" ng-controller="MainCtrl">
+        <div class="panel">
+            <full-calendar ng-transclude>
+                <div id="calendar"></div>
+            </full-calendar>
+        </div>
+    </div>
+    
 
     <!--MODAL 1-->
     

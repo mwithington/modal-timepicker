@@ -529,7 +529,16 @@ mymodal.factory("CalendarFactory", function () {
             totalMinutes += this;
         });
 
-        alert("Total Hours: " + totalHours + " Total Minutes: " + totalMinutes);
+        var $hoursAlert = $("#hoursAlert");
+        $hoursAlert.on("close.bs.alert", function () {
+            $hoursAlert.hide();
+            return false;
+        });
+
+        var display = "Total Hours: " + totalHours + " Total Minutes: " + totalMinutes;
+        document.getElementById("alert").innerHTML = display;
+        $("#hoursAlert").show();
+        
 
     }
 
