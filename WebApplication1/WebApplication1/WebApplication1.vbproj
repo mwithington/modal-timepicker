@@ -1835,6 +1835,7 @@
     <Content Include="fullcalendar-2.3.1\bootstrap-validator-master\package.json" />
     <Content Include="fullcalendar-2.3.1\bootstrap-validator-master\README.md" />
     <Content Include="fullcalendar-2.3.1\bootstrap-validator-master\_config.yml" />
+    <Content Include="fullcalendar-2.3.1\demos\json1.json" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -1940,6 +1941,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
+      <UserProperties fullcalendar-2_13_11_2demos_2json1_1json__JSONSchema="http://json-schema.org/card" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

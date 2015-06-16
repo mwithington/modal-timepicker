@@ -18,7 +18,7 @@ var i = 0;
 /*
  *Controller
  */
-mymodal.controller('MainCtrl', function ($scope,$http, CalendarFactory) {
+mymodal.controller('MainCtrl', function ($scope, $http, CalendarFactory) {
     //$scope.selectedTest = null;
     //$scopescope.testAccounts = [];
     //$http({
@@ -28,6 +28,14 @@ mymodal.controller('MainCtrl', function ($scope,$http, CalendarFactory) {
     //}).success(function (result){
     //    $scope.testAccounts = result;
     //})
+
+    
+    $http.get('json1.json').success(function (data) {
+        console.log("Success!");
+        $scope.info = data;
+        console.log("info", $scope.info)
+    });
+
     
     $scope.start_time = '12:00AM',
     $scope.end_time = '12:00PM',
