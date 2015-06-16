@@ -29,8 +29,8 @@ mymodal.controller('MainCtrl', function ($scope,$http, CalendarFactory) {
     //    $scope.testAccounts = result;
     //})
     
-    $scope.startTime = 'Start Time';
-    $scope.endTime = 'End Time';
+    $scope.start_time = '12:00AM',
+    $scope.end_time = '12:00PM',
 
     $scope.showModal = false;
 
