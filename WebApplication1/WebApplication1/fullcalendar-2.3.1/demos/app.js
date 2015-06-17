@@ -33,9 +33,15 @@ mymodal.controller('MainCtrl', function ($scope, $http, CalendarFactory) {
     $http.get('json1.json').success(function (data) {
         console.log("Success!");
         $scope.user_id = data.user_id;
-        $scope.deptCodes = data.division_codes;
 
-        console.log("User Id", $scope.user_id)
+        $scope.deptCodes = [];
+        for (var i = 0; i < data.division_codes.length; i++) {
+            $scope.deptCodes[i] = data.division_codes[i][1];
+            console.log("User Id", $scope.deptCodes)
+        }
+        
+
+        
 
 
     });
@@ -604,6 +610,7 @@ mymodal.directive('userInfoCard', function () {
         restrict: "E",
         scope: {
             user: '=',
+            deptCode: '=',
             initialCollapsed: '@collapsed'
         },
         controller: function ($scope) {

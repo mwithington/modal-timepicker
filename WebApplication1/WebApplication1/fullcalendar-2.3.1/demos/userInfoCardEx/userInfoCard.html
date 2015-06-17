@@ -1,19 +1,16 @@
 ﻿
 <div class="panel panel-primary">
     <div class="panel-heading" ng-click="collapse()">
-        {{user}}
+         User Name:{{user}}
     </div>
     <div class="panel body" ng-hide="collapsed">
         <address></address>
         <h4>OPTIONS:</h4>
-        <ul>
-            <li ng-repeat='friend in user.friends'>
-                INFO
-                <remove-friend method="removeFriend(friend)"></remove-friend>
-
-
-            </li>
-        </ul>
+        
+            <select>
+                <option ng-repeat ='depts in deptCode'>{{depts}}</option>
+            </select>
+        
 
     </div>
 </div>
