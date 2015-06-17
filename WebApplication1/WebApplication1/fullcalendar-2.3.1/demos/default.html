@@ -29,12 +29,14 @@
     </style>
 </head>
 <body ng-app="mymodal" ng-controller="MainCtrl">
+    <div class="well">
     <header class="container">
         <div class="page-header">
             <h1>Time Sheet</h1>
             <p>Select the day/days for which you want to enter your hours worked</p>
         </div>
     </header>
+    </div>
     <div class="container">
         <div id="menu" class="navbar navbar-default">
             <div class="navbar-header">
@@ -115,7 +117,7 @@
                     <clock-picker></clock-picker>
                     <span class="help-block has-error" ng-show="timeForm.end_time.$invalid && timeForm.end_time.$dirty">End Time cannot be left blank</span>
                 </div>
-                <br />
+                <hr />
                 <div class="form-group">
                     <button type="submit" class="btn btn-success" ng-click="hoursCalc()" id="submitHours" ng-disabled="timeForm.start_time.$dirty && timeForm.start_time.$invalid ||
                         timeForm.end_time.$dirty && timeForm.end_time.$invalid">Submit</button>
@@ -170,15 +172,14 @@
     
 
 
-    <div ng-controller="MainCtrl" class="container">
-        <modal3 visible="showModal" id="myModal3">
-            <div style="padding-top:30px">
-                <user-info-card user="user_id" dept-code="deptCodes" collapsed="true">
-
-                </user-info-card>
-
+    <div ng-controller="MainCtrl">
+        <modal3 id="myModal3">
+            <div class="modal-body">
+                
+                <user-info-card user="user_id" dept-code="deptCodes" collapsed="true"></user-info-card>
+                
             </div>
-
+            <hr />
             <button class="btn btn-success" ng-click="saveOptions()">Save</button>
 
         </modal3>

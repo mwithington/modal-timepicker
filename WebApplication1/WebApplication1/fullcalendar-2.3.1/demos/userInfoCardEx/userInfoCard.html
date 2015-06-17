@@ -1,15 +1,17 @@
 ﻿
 <div class="panel panel-primary">
     <div class="panel-heading" ng-click="collapse()">
-         User Name:{{user}}
+         User Name: {{user}}
     </div>
-    <div class="panel body" ng-hide="collapsed">
-        <address></address>
-        <h4>OPTIONS:</h4>
+    <div class="panel body" style="padding-top:30px; padding-left:30px; padding-right:30px; padding-bottom:30px" ng-hide="collapsed">
         
-            <select>
+        <label>OPTIONS:</label>
+        
+            <select class="form-control">
                 <option ng-repeat ='depts in deptCode'>{{depts}}</option>
             </select>
+
+        
         
 
     </div>
