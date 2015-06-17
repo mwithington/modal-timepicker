@@ -57,10 +57,10 @@ mymodal.controller('MainCtrl', function ($scope, $http, CalendarFactory) {
         CalendarFactory.removeEvent();
     };
 
-    $scope.editTimes = function () {
+    /*$scope.editTimes = function () {
         CalendarFactory.assignEdit();
         $('#myModal2').modal("hide");
-    };
+    };*/
 
     $scope.addAllHours = function(){
         CalendarFactory.addAllHours();
@@ -73,6 +73,10 @@ mymodal.controller('MainCtrl', function ($scope, $http, CalendarFactory) {
     $scope.saveOptions = function () {
         CalendarFactory.saveOptions();
 
+    };
+
+    $scope.confirmDelete = function () {
+        CalendarFactory.confirmDelete();
     };
 
 });
@@ -116,7 +120,7 @@ mymodal.directive('modal1', function () {
 /*
  *Modal2 Directive
  */
-mymodal.directive('modal2', function () {
+/*mymodal.directive('modal2', function () {
     return {
         templateUrl: 'userOptionsModal2.html',
         restrict: 'E',
@@ -147,7 +151,7 @@ mymodal.directive('modal2', function () {
 
 
 
-});
+});*/
 
 
 /*
@@ -226,6 +230,7 @@ mymodal.directive('fullCalendar', function () {
                     console.log('Selected something: ');
                     $('#myModal1').modal("show");
                     
+                    
                     console.log(start);
                     console.log(end);
                     
@@ -241,14 +246,14 @@ mymodal.directive('fullCalendar', function () {
                 },
                 
                 //eventClick
-                eventClick: function (event, element) {
+                /*eventClick: function (event, element) {
 
                     $('#myModal2').modal("show");
                     console.log(hoursArray);
                     console.log(minutesArray);
                     $('#calendar').fullCalendar('updateEvent', event);
 
-                },
+                },*/
 
                 //deleting event
                 eventRender: function(event, element) {
@@ -321,8 +326,7 @@ mymodal.factory("CalendarFactory", function () {
     }
 
     function removeEvent() {
-        $('#myModal2').modal('hide');
-
+        
         $('#calendar').fullCalendar('removeEvents');
         
         hoursArray.length = 0;
@@ -535,11 +539,21 @@ mymodal.factory("CalendarFactory", function () {
             return false;
         });
 
-        var display = "Total Hours: " + totalHours + " Total Minutes: " + totalMinutes;
+        var display = "<strong>Total Hours: </strong>" + totalHours + "<br/><strong> Total Minutes: </strong>" + totalMinutes;
         document.getElementById("alert").innerHTML = display;
         $("#hoursAlert").show();
         
 
+    }
+
+    function confirmDelete() {
+        var $deleteAlert = $("#deleteAlert");
+        $deleteAlert.on("close.bs.alert", function () {
+            $deleteAlert.hide();
+            return false;
+        });
+
+        $("#deleteAlert").show();
     }
 
 
@@ -565,7 +579,8 @@ mymodal.factory("CalendarFactory", function () {
         editTimes: editTimes,
         addAllHours: addAllHours,
         saveOptions: saveOptions,
-        showOptions: showOptions
+        showOptions: showOptions,
+        confirmDelete: confirmDelete
 
     }
 

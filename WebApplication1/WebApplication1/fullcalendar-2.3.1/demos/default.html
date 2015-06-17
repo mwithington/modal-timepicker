@@ -13,6 +13,7 @@
     <link href="Scripts/bootstrap.min.css" rel="stylesheet" />
     <link href="Scripts/buttonStyles.css" rel="stylesheet" />
 
+    <title>Time Sheet</title>
     <style>
         body {
             margin: 40px 10px;
@@ -29,8 +30,9 @@
 </head>
 <body ng-app="mymodal" ng-controller="MainCtrl">
     <header class="container">
-        <div>
+        <div class="page-header">
             <h1>Time Sheet</h1>
+            <p>Select the day/days for which you want to enter your hours worked</p>
         </div>
     </header>
     <div class="container">
@@ -38,13 +40,12 @@
             <div class="navbar-header">
                 <button class="btn btn-success navbar-toggle"
                         data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="glyphicon glyphicon-chevron-down"></span>
-                </button>
+                    <span class="glyphicon glyphicon-chevron-down"></span> Expand Menu</button>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="nav"><button class="btn btn-success" ng-click="addAllHours()">Add Up Hours</button></li>
-                    <li class="nav"><button class="btn btn-danger" ng-click="removeEvent()">Delete ALL Times</button></li>
+                    <li class="nav"><button class="btn btn-danger" ng-click="confirmDelete()">Delete All Times</button></li>
                     <li class="nav"><button class="btn btn-primary glyphicon glyphicon-cog" ng-click="showOptions()"></button></li>
                 </ul>
             </div>
@@ -52,11 +53,25 @@
     </div>
 
     <div class="container">
-    <div class="alert alert-warning collapse" id="hoursAlert">
+    <div class="alert alert-success collapse" id="hoursAlert">
         <a href="#" data-dismiss="alert" class="close">&times;</a>
         <p id="alert"></p>
     </div>
     </div>
+
+    <div ng-controller="MainCtrl">
+    <div class="container">
+        <div class="alert alert-danger collapse" id="deleteAlert">
+            <a href="#" data-dismiss="alert" class="close">&times;</a>
+            <p>Are you sure you want to delete all times you have entered for this month and previous months?</p> 
+             <br/>
+            <button type="button" class="btn btn-default" data-dismiss="alert">Nevermind</button>
+            <button type="button" class="btn btn-primary" ng-click="removeEvent()" data-dismiss="alert">Yes, delete all</button>
+        </div>
+    </div>
+    </div>
+
+
 
     <div class="container" ng-controller="MainCtrl">
         <div class="panel">
@@ -67,7 +82,7 @@
     </div>
     
 
-    <!--MODAL 1-->
+    <!--MODAL 1 Enter Times-->
     
     <div ng-controller="MainCtrl" class="container" >
 
@@ -104,6 +119,7 @@
                 <div class="form-group">
                     <button type="submit" class="btn btn-success" ng-click="hoursCalc()" id="submitHours" ng-disabled="timeForm.start_time.$dirty && timeForm.start_time.$invalid ||
                         timeForm.end_time.$dirty && timeForm.end_time.$invalid">Submit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </form>
         </modal1>
@@ -111,7 +127,7 @@
     </div>
 
     <!--MODAL 2-->
-        <div ng-controller="MainCtrl" class="container">
+        <!--<div ng-controller="MainCtrl" class="container">
             <modal2 id="myModal2">
                 <form name="timeForm" role="form" id="timeForm" novalidate="">
                     <div class="form-group" ng-class="{'has-error': timeForm.start_time.$invalid && timeForm.start_time.$dirty}">
@@ -148,7 +164,10 @@
                     </div>
                 </form>
             </modal2>
-        </div>
+        </div>-->
+
+
+    
 
 
     <div ng-controller="MainCtrl" class="container">
