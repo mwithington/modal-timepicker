@@ -32,9 +32,15 @@ mymodal.controller('MainCtrl', function ($scope, $http, CalendarFactory) {
     
     $http.get('json1.json').success(function (data) {
         console.log("Success!");
-        $scope.info = data;
-        console.log("info", $scope.info)
+        $scope.user_id = data.user_id;
+        $scope.deptCodes = data.division_codes;
+
+        console.log("User Id", $scope.user_id)
+
+
     });
+
+
 
     
     $scope.start_time = '12:00AM',
@@ -590,37 +596,7 @@ mymodal.factory("CalendarFactory", function () {
  
 
 
-mymodal.controller('userCardCtrl', function ($scope) {
-    $scope.user1 = {
-        name: 'Luke Skywalker',
-        address: {
-            street: 'PO box 123',
-            city: 'Secret Rebel base',
-            planet: 'Yavin 4'
-        },
-        friends: [
-          'Han',
-          'Leia',
-          'Chewbacca'
-        ]
-    }
-    $scope.user2 = {
-        name: 'Han Solo',
-        address: {
-            street: 'PO box 123',
-            city: 'Secret Rebel base',
-            planet: 'Yavin 4'
-        },
-        friends: [
-          'Leia',
-          'Luke',
-          'Chewbacca'
-        ]
-    }
 
-    console.log($scope);
-
-});
 
 mymodal.directive('userInfoCard', function () {
     return {
@@ -633,9 +609,7 @@ mymodal.directive('userInfoCard', function () {
         controller: function ($scope) {
             //$scope.collapsed = false;
             $scope.collapsed = ($scope.initialCollapsed === 'true')
-            $scope.knightMe = function (user) {
-                user.rank = "knight";
-            }
+           
             $scope.collapse = function () {
                 $scope.collapsed = !$scope.collapsed;
             }
