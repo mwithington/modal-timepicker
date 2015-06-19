@@ -9,9 +9,13 @@
     <link href="userInfoCardEx/address.html"/>
     <link href="userInfoCardEx/userInfoCard.html"/>
 
+    
+
+    <link href="header/titleBarTemplate.html" />
     <link href="userOptionsModal.html" />
     <link href="Scripts/bootstrap.min.css" rel="stylesheet" />
     <link href="Scripts/buttonStyles.css" rel="stylesheet" />
+    <link href="header/header.css" rel="stylesheet" />
 
     <title>Time Sheet</title>
     <style>
@@ -30,13 +34,16 @@
 </head>
 <body ng-app="mymodal" ng-controller="MainCtrl">
     <div class="well">
-    <header class="container">
-        <div class="page-header">
-            <h1>Time Sheet</h1>
-            <p>Select the day/days for which you want to enter your hours worked</p>
-        </div>
-    </header>
+        <header class="container">
+            <div class="page-header">
+                <h1>Time Sheet</h1>
+                <p>Select the day(s) for which you want to enter your hours worked</p>
+            </div>
+        </header>
     </div>
+        
+   
+    
     <div class="container">
         <div id="menu" class="navbar navbar-default">
             <div class="navbar-header">
@@ -176,7 +183,7 @@
         <modal3 id="myModal3">
             <div class="modal-body">
                 
-                <user-info-card user="user_id" dept-code="deptCodes" collapsed="true"></user-info-card>
+                <user-info-card user="user_id" dept-code="deptCodes" loc-code="locCodes" pro-code="proCodes" collapsed="true"></user-info-card>
                 
             </div>
             <hr />

@@ -46,7 +46,8 @@ body .fc { /* extra precedence to overcome jqui */
 }
 
 .fc-unthemed .fc-today {
-	background: #bce8f1;
+	background: #A1E3D2;
+    //background: #bce8f1;
     //background: #fcf8e3;
 }
 

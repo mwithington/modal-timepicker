@@ -3,13 +3,26 @@
     <div class="panel-heading" ng-click="collapse()">
          User Name: {{user}}
     </div>
+
     <div class="panel body" style="padding-top:30px; padding-left:30px; padding-right:30px; padding-bottom:30px" ng-hide="collapsed">
         
+        <label>Location:</label>
+        <select class="form-control">
+            <option ng-repeat='locs in locCode'>{{locs}}</option>
+        </select>
+
+        <br />
         <label>OPTIONS:</label>
         
-            <select class="form-control">
+        <select class="form-control">
                 <option ng-repeat ='depts in deptCode'>{{depts}}</option>
             </select>
+        <br/>
+        
+        <label>Project:</label>
+        <select class="form-control">
+            <option ng-repeat='pros in proCode'>{{pros}}</option>
+        </select>
 
         
         

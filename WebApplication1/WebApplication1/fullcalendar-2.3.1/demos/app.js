@@ -39,6 +39,20 @@ mymodal.controller('MainCtrl', function ($scope, $http, CalendarFactory) {
             $scope.deptCodes[i] = data.division_codes[i][1];
             console.log("User Id", $scope.deptCodes)
         }
+
+        $scope.locCodes = [];
+        for (var j = 0; j < data.location_codes.length; j++) {
+            $scope.locCodes[j] = data.location_codes[j][1];
+            console.log("User Id", $scope.locCodes)
+        }
+
+
+        $scope.proCodes = data.project_codes;
+        $scope.proCodes = [];
+        for (var k = 0; k < data.project_codes.length; k++) {
+            $scope.proCodes[k] = data.project_codes[k][1];
+            console.log("User Id", $scope.proCodes)
+        }
         
 
         
@@ -289,6 +303,23 @@ mymodal.directive('fullCalendar', function () {
 
     }
 
+});
+
+/*
+ *Header Directive
+ */
+
+mymodal.directive("titleBar", function () {
+    return {
+        transclude: false,
+        scope: {
+            title: '@',
+            subtitle: '@'
+
+        },
+        templateUrl: "demos/header/titleBarTemplate.html"
+
+    };
 });
 
 /*
@@ -611,6 +642,8 @@ mymodal.directive('userInfoCard', function () {
         scope: {
             user: '=',
             deptCode: '=',
+            locCode: '=',
+            proCode: '=',
             initialCollapsed: '@collapsed'
         },
         controller: function ($scope) {
