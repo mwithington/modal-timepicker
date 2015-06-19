@@ -42,7 +42,7 @@ mymodal.controller('MainCtrl', function ($scope, $http, CalendarFactory) {
 
         $scope.locCodes = [];
         for (var j = 0; j < data.location_codes.length; j++) {
-            $scope.locCodes[j] = data.location_codes[j][1];
+            $scope.locCodes[j] = data.location_codes[j][0];
             console.log("User Id", $scope.locCodes)
         }
 
@@ -50,7 +50,7 @@ mymodal.controller('MainCtrl', function ($scope, $http, CalendarFactory) {
         $scope.proCodes = data.project_codes;
         $scope.proCodes = [];
         for (var k = 0; k < data.project_codes.length; k++) {
-            $scope.proCodes[k] = data.project_codes[k][1];
+            $scope.proCodes[k] = data.project_codes[k][0];
             console.log("User Id", $scope.proCodes)
         }
         
@@ -453,15 +453,19 @@ mymodal.factory("CalendarFactory", function () {
         console.log("The other hour ", h2);
 
         // 12:00pm - 2:00pm
-        if (((isXAP == "P") || (isXAP == "p")) && ((isYAP == "P") || (isYAP == "p")) && (h == 12)) {
+        if (((isXAP == "P") || (isXAP == "p")) && ((isYAP == "P") || (isYAP == "p")) && (h > h2) &&(h == 12)) {
 
             eTime24 = parseInt(eTime, 10) + 12;
-            console.log("This should equal 14", eTime24);
             sTime24 = parseInt(sTime, 10);
-            console.log("This should equal 12", sTime24);
             hours = eTime24 - sTime24;
-            console.log("This should equal 2", hours);
+        }
 
+        // 12:00am - 2:00am
+        if (((isXAP == "A") || (isXAP == "a")) && ((isYAP == "A") || (isYAP == "a")) && (h > h2) && (h == 12)) {
+
+            eTime24 = parseInt(eTime, 10) + 12;
+            sTime24 = parseInt(sTime, 10);
+            hours = eTime24 - sTime24;
         }
 
         // 8:00pm - 7:00pm
@@ -470,7 +474,14 @@ mymodal.factory("CalendarFactory", function () {
             eTime24 = parseInt(eTime, 10);
             sTime24 = parseInt(sTime, 10);
             hours = (eTime24 - sTime24) + 24;
+        }
 
+        // 8:00am - 7:00am
+        if (((isXAP == "A") || (isXAP == "a")) && ((isYAP == "A") || (isYAP == "a")) && (h > h2) && (h != 12)) {
+
+            eTime24 = parseInt(eTime, 10);
+            sTime24 = parseInt(sTime, 10);
+            hours = (eTime24 - sTime24) + 24;
         }
 
         // 2:00pm - 6:00pm
@@ -479,46 +490,65 @@ mymodal.factory("CalendarFactory", function () {
             eTime24 = parseInt(eTime, 10);
             sTime24 = parseInt(sTime, 10);
             hours = eTime24 - sTime24;
-
         }
 
-        if (((isXAP == "P") || (isXAP == "p")) && ((isYAP == "A") || (isYAP == "a"))) {
+        // 2:00am - 6:00am
+        if (((isXAP == "A") || (isXAP == "a")) && ((isYAP == "A") || (isYAP == "a")) && (h < h2) && (h != 12)) {
+
+            eTime24 = parseInt(eTime, 10);
+            sTime24 = parseInt(sTime, 10);
+            hours = eTime24 - sTime24;
+        }
+
+        // 9:00pm - 2:00am
+        if (((isXAP == "P") || (isXAP == "p")) && ((isYAP == "A") || (isYAP == "a")) && (h != 12) && (h2 != 12)){
 
             eTime24 = parseInt(eTime, 10) + 12;
             sTime24 = parseInt(sTime, 10);
             hours = eTime24 - sTime24;
-
         }
 
-        if (((isXAP == "A") || (isXAP == "a")) && ((isYAP == "A") || (isYAP == "a")) && (h < h2)) {
+        // 9:00am - 2:00pm
+        if (((isXAP == "A") || (isXAP == "a")) && ((isYAP == "P") || (isYAP == "p")) && (h2 != 12) && (h != 12)) {
 
-            eTime24 = parseInt(eTime, 10);
-            sTime24 = parseInt(sTime, 10);
-            hours = eTime24 - sTime24;
-
-        }
-
-        if (((isXAP == "A") || (isXAP == "a")) && ((isYAP == "A") || (isYAP == "a")) && (h > h2) && (h == 12)) {
-
-            eTime24 = parseInt(eTime, 10);
-            sTime24 = parseInt(sTime, 10);
-            hours = eTime24;
-
-        }
-
-        if (((isXAP == "A") || (isXAP == "a")) && ((isYAP == "A") || (isYAP == "a")) && (h > h2) && (h != 12)) {
-
-            eTime24 = parseInt(eTime, 10);
-            sTime24 = parseInt(sTime, 10);
-            hours = (eTime24 - sTime24) + 24;
-
-        }
-
-        if (((isXAP == "A") || (isXAP == "a")) && ((isYAP == "P") || (isYAP == "p"))) {
             eTime24 = parseInt(eTime, 10) + 12;
             sTime24 = parseInt(sTime, 10);
             hours = eTime24 - sTime24;
         }
+
+        // 12:00pm - 2:00am
+        if (((isXAP == "P") || (isXAP == "p")) && ((isYAP == "A") || (isYAP == "a")) && (h == 12)) {
+
+            eTime24 = parseInt(eTime, 10);
+            sTime24 = parseInt(sTime, 10);
+            hours = eTime24 + sTime24;
+
+        }
+
+        // 12:00am - 2:00pm
+        if (((isXAP == "A") || (isXAP == "a")) && ((isYAP == "P") || (isYAP == "p")) && (h == 12)) {
+            eTime24 = parseInt(eTime, 10);
+            sTime24 = parseInt(sTime, 10);
+            hours = eTime24 + sTime24;
+        }
+
+        // 9:00pm - 12:00am
+        if (((isXAP == "P") || (isXAP == "p")) && ((isYAP == "A") || (isYAP == "a")) && (h2 == 12)) {
+            eTime24 = parseInt(eTime, 10);
+            sTime24 = parseInt(sTime, 10);
+            hours = eTime24 - sTime24;
+        }
+
+        // 9:00am - 12:00pm
+        if (((isXAP == "A") || (isXAP == "a")) && ((isYAP == "P") || (isYAP == "p")) && (h2 == 12)) {
+            eTime24 = parseInt(eTime, 10);
+            sTime24 = parseInt(sTime, 10);
+            hours = eTime24 - sTime24;
+        }
+
+        
+
+        
 
         console.log("Start Time: ", sTime24);
         console.log("End Time: ", eTime24);
