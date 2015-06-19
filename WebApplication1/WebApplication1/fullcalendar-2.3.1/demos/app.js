@@ -452,6 +452,8 @@ mymodal.factory("CalendarFactory", function () {
         console.log("the hour ", h);
         console.log("The other hour ", h2);
 
+
+        
         // 12:00pm - 2:00pm
         if (((isXAP == "P") || (isXAP == "p")) && ((isYAP == "P") || (isYAP == "p")) && (h > h2) &&(h == 12)) {
 
@@ -546,6 +548,18 @@ mymodal.factory("CalendarFactory", function () {
             hours = eTime24 - sTime24;
         }
 
+        // whole day
+        if (((isXAP == "A") || (isXAP == "a")) && ((isYAP == "P") || (isYAP == "p")) && (h == h2)) {
+            hours = 24;
+        }
+
+        // whole day
+        if (((isXAP == "P") || (isXAP == "p")) && ((isYAP == "A") || (isYAP == "a")) && (h == h2)) {
+
+            hours = 24;
+
+        }
+
         
 
         
@@ -578,17 +592,17 @@ mymodal.factory("CalendarFactory", function () {
         console.log("HOURS: ", hours);
         console.log("MINUTES: ", minutes);
 
-        var extraHours = Math.floor((minutes * days) / 60);
+        //var extraHours = Math.floor((minutes * days) / 60);
 
-        console.log(extraHours, "THIS IS X")
+        //console.log(extraHours, "THIS IS X")
 
-        hoursArray.push((hours * days) + extraHours);
-
+        //hoursArray.push((hours * days) + extraHours);
+        hoursArray.push(hours * days);
         console.log(hoursArray);
 
-        minutesArray.push((minutes * days) % 60);
-
-        console.log(117 / 60);
+        //minutesArray.push((minutes * days) % 60);
+        minutesArray.push(minutes * days);
+        //console.log(117 / 60);
 
         console.log(minutesArray);
 
@@ -605,6 +619,12 @@ mymodal.factory("CalendarFactory", function () {
         $.each(minutesArray, function () {
             totalMinutes += this;
         });
+
+        if (totalMinutes >= 60) {
+            totalMinutes = totalMinutes % 60
+            totalHours += 1;
+        }
+        
 
         var $hoursAlert = $("#hoursAlert");
         $hoursAlert.on("close.bs.alert", function () {
