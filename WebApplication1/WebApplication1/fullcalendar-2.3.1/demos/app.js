@@ -283,7 +283,7 @@ mymodal.directive('fullCalendar', function () {
 
                 //deleting event
                 eventRender: function(event, element) {
-                    element.append( "<span class='closeon'><button class='btn btn-danger'>X</button></span>" );
+                    element.append( "<span class='closeon'><br/><br/><button class='btn btn-danger brand'>X</button></span>" );
                     element.find(".closeon").click(function() {
                         $('#calendar').fullCalendar('removeEvents', event._id);
 
