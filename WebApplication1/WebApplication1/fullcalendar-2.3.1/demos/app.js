@@ -247,7 +247,7 @@ mymodal.directive('fullCalendar', function () {
             console.log("Element Children", element.children());
 
             element.children("#calendar").fullCalendar({
-                editable: true,
+                editable: false,
                 eventLimit: true, // allow "more" link when too many events
                 selectable: true,
 
@@ -283,7 +283,7 @@ mymodal.directive('fullCalendar', function () {
 
                 //deleting event
                 eventRender: function(event, element) {
-                    element.append( "<span class='closeon'>X</span>" );
+                    element.append( "<span class='closeon'><button class='btn btn-danger'>X</button></span>" );
                     element.find(".closeon").click(function() {
                         $('#calendar').fullCalendar('removeEvents', event._id);
 
@@ -621,8 +621,10 @@ mymodal.factory("CalendarFactory", function () {
         });
 
         if (totalMinutes >= 60) {
+            var th = Math.floor(totalMinutes / 60)
             totalMinutes = totalMinutes % 60
-            totalHours += 1;
+            console.log("T", th);
+            totalHours += th;
         }
         
 
@@ -708,7 +710,6 @@ mymodal.directive('userInfoCard', function () {
         }
 
     }
-
 
 });
 
