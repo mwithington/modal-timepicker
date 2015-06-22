@@ -33,14 +33,20 @@
     </style>
 </head>
 <body ng-app="mymodal" ng-controller="MainCtrl">
-    <div class="well">
+    <div class="container">
+    <header-framework title="Time Sheet"
+                      subtitle="Select the day(s) for which you want to enter your hours worked">
+
+    </header-framework>
+    </div>
+    <!--<div class="well">
         <header class="container">
             <div class="page-header">
                 <h1>Time Sheet</h1>
                 <p>Select the day(s) for which you want to enter your hours worked</p>
             </div>
         </header>
-    </div>
+    </div>-->
         
    
     
@@ -53,20 +59,59 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="nav"><button class="btn btn-success" ng-click="addAllHours()">Add Up Hours</button></li>
+                    <li class="nav"><button class="btn btn-success" ng-click="confirmSubmit()">Submit for Approval</button></li>
+                    <li class="nav"><button class="btn btn-primary" ng-click="addAllHours()">Add Up Hours</button></li>
                     <li class="nav"><button class="btn btn-danger" ng-click="confirmDelete()">Delete All Times</button></li>
-                    <li class="nav"><button class="btn btn-primary glyphicon glyphicon-cog" ng-click="showOptions()"></button></li>
+                    <li class="nav"><button class="btn btn-info glyphicon glyphicon-cog" ng-click="showOptions()"></button></li>
                 </ul>
             </div>
         </div>
     </div>
 
+    <!--ALERTS-->
+
     <div class="container">
-    <div class="alert alert-success collapse" id="hoursAlert">
-        <a href="#" data-dismiss="alert" class="close">&times;</a>
-        <p id="alert"></p>
+        <div class="alert alert-success collapse" id="hoursAlert">
+            <a href="#" data-dismiss="alert" class="close">&times;</a>
+            <p id="alert"></p>
+        </div>
     </div>
+
+    <div class="container">
+        <div class="alert alert-success collapse" id="submitAlert">
+            <a href="#" data-dismiss="alert" class="close">&times;</a>
+            <p id="alert">Your hours have been submitted for aprroval. No changes can be made to your time sheet.</p>
+        </div>
     </div>
+
+    <div ng-controller="MainCtrl">
+        <div class="container">
+            <div class="alert alert-warning collapse" id="preSubmitAlert">
+                <a href="#" data-dismiss="alert" class="close">&times;</a>
+                <p>Once you submit your hours, no changes can be made to the time sheet. <br /> Are you sure you want to submit?</p>
+                <br />
+                <button type="button" class="btn btn-default" data-dismiss="alert">Nevermind</button>
+                <button type="button" class="btn btn-primary" ng-click="submitHours()" data-dismiss="alert">Yes, submit</button>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="container">
+        <div class="alert alert-warning collapse" id="postedAlert">
+            <a href="#" data-dismiss="alert" class="close">&times;</a>
+            <p id="alert">Sorry, your times have already been posted. No changes to your time sheet can be made.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="alert alert-warning collapse" id="approvedAlert">
+            <a href="#" data-dismiss="alert" class="close">&times;</a>
+            <p id="alert">Sorry, your times have already been approved. Please contact your supervisor if you wish to make any changes.</p>
+        </div>
+    </div>
+    
+    
 
     <div ng-controller="MainCtrl">
     <div class="container">
@@ -78,9 +123,9 @@
             <button type="button" class="btn btn-primary" ng-click="removeEvent()" data-dismiss="alert">Yes, delete all</button>
         </div>
     </div>
-    </div>
+    </div> <!--end alerts-->
 
-
+    <!--Calendar-->
 
     <div class="container" ng-controller="MainCtrl">
         <div class="panel">
@@ -100,14 +145,14 @@
                 <div class="form-group" ng-class="{'has-error': timeForm.start_time.$invalid && timeForm.start_time.$dirty}">
                     <label class="control-label" for="startTime">Start Time</label>
                     <div class="input-group clockpicker">
-                        <input type="text" name="start_time" class="form-control" id="Start" ng-model="start_time" placeholder="Start Time" ng-pattern="/^((([0]?[1-9]|1[0-2])(:|\.)[0-5][0-9]((:|\.)[0-5][0-9])?()?(AM|am|aM|Am|PM|pm|pM|Pm)))$/" required="" />
+                        <input type="text" name="start_time" class="form-control" id="Start" ng-model="start_time" placeholder="Start Time" ng-pattern="/^((([0][1-9]|1[0-2])(:|\.)[0-5][0-9]((:|\.)[0-5][0-9])?()?(AM|am|aM|Am|PM|pm|pM|Pm)))$/" required="" />
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-time"></span>
                             <br />
                         </span>
                     </div>
                     <clock-picker></clock-picker>
-                    <span class="help-block has-error" ng-show="timeForm.start_time.$invalid && timeForm.start_time.$dirty">Start Time cannot be left blank</span>
+                    <span class="help-block has-error" ng-show="timeForm.start_time.$invalid && timeForm.start_time.$dirty">Start Time cannot be left blank and must be entered in correct format</span>
                 </div>
 
                 <br />
@@ -115,14 +160,14 @@
                 <div class="form-group" ng-class="{'has-error': timeForm.end_time.$invalid && timeForm.end_time.$dirty}">
                     <label class="control-label" for="endTime">End Time</label>
                     <div class="input-group clockpicker">
-                        <input type="text" name="end_time" class="form-control" id="End" ng-model="end_time" placeholder="End Time" ng-pattern="/^((([0]?[1-9]|1[0-2])(:|\.)[0-5][0-9]((:|\.)[0-5][0-9])?()?(AM|am|aM|Am|PM|pm|pM|Pm)))$/" required="" />
+                        <input type="text" name="end_time" class="form-control" id="End" ng-model="end_time" placeholder="End Time" ng-pattern="/^((([0][1-9]|1[0-2])(:|\.)[0-5][0-9]((:|\.)[0-5][0-9])?()?(AM|am|aM|Am|PM|pm|pM|Pm)))$/" required="" />
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-time"></span>
                             <br />
                         </span>
                     </div>
                     <clock-picker></clock-picker>
-                    <span class="help-block has-error" ng-show="timeForm.end_time.$invalid && timeForm.end_time.$dirty">End Time cannot be left blank</span>
+                    <span class="help-block has-error" ng-show="timeForm.end_time.$invalid && timeForm.end_time.$dirty">End Time cannot be left blank and must be entered in correct format</span>
                 </div>
                 <hr />
                 <div class="form-group">

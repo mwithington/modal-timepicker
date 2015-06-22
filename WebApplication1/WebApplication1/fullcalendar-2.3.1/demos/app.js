@@ -11,6 +11,9 @@ var days;
 var hours;
 var minutes;
 var i = 0;
+var posted = false;
+var approved = false;
+
 
 
 
@@ -103,6 +106,14 @@ mymodal.controller('MainCtrl', function ($scope, $http, CalendarFactory) {
 
     $scope.confirmDelete = function () {
         CalendarFactory.confirmDelete();
+    };
+
+    $scope.submitHours = function () {
+        CalendarFactory.submitHours();
+    };
+
+    $scope.confirmSubmit = function () {
+        CalendarFactory.confirmSubmit();
     };
 
 });
@@ -253,20 +264,40 @@ mymodal.directive('fullCalendar', function () {
 
                 //select
                 select: function (start, end) {
-                    console.log('Selected something: ');
-                    $('#myModal1').modal("show");
-                    
-                    
-                    console.log(start);
-                    console.log(end);
-                    
-                    var x = document.getElementById("Start").value;
-                    var y = document.getElementById("End").value;
+                    console.log('Selected something');
+                    if (approved == false && posted == false) {
+                        $('#myModal1').modal("show");
 
-                    console.log(x)
 
-                    endT = end;
-                    startT = start;
+                        console.log(start);
+                        console.log(end);
+
+                        var x = document.getElementById("Start").value;
+                        var y = document.getElementById("End").value;
+
+                        
+
+                        endT = end;
+                        startT = start;
+                    }
+                    else if (approved == true && posted == false) {
+                        var $approvedAlert = $("#approvedAlert");
+                        $approvedAlert.on("close.bs.alert", function () {
+                            $approvedAlert.hide();
+                            return false;
+                        });
+
+                        $("#approvedAlert").show();
+                    }
+                    else if (approved == true && posted == true) {
+                        var $postedAlert = $("#postedAlert");
+                        $postedAlert.on("close.bs.alert", function () {
+                            $postedAlert.hide();
+                            return false;
+                        });
+
+                        $("#postedAlert").show();
+                    }
                     
 
                 },
@@ -283,16 +314,40 @@ mymodal.directive('fullCalendar', function () {
 
                 //deleting event
                 eventRender: function(event, element) {
-                    element.append( "<span class='closeon'><button class='btn btn-danger'>X</button></span>" );
-                    element.find(".closeon").click(function() {
-                        $('#calendar').fullCalendar('removeEvents', event._id);
+                    element.append( "<br/><span class='closeon'><button class='btn btn-danger glyphicon glyphicon-remove'></button></span>" );
 
-                        console.log("EventID", event._id);
+                    element.find(".closeon").click(function () {
+                        if (approved == false && posted == false) {
+                            $('#calendar').fullCalendar('removeEvents', event._id);
 
-                        hoursArray[event._id] = 0;
-                        minutesArray[event._id] = 0;
-                        console.log(hoursArray);
-                        console.log(minutesArray);
+                            console.log("EventID", event._id);
+
+                            hoursArray[event._id] = 0;
+                            minutesArray[event._id] = 0;
+                            console.log("Hours Array: ", hoursArray);
+                            console.log("Minutes Array: ", minutesArray);
+       
+                        }
+
+                        else if (approved == true && posted == false) {
+                            var $approvedAlert = $("#approvedAlert");
+                            $approvedAlert.on("close.bs.alert", function () {
+                                $approvedAlert.hide();
+                                return false;
+                            });
+
+                            $("#approvedAlert").show();
+
+                        }
+                        else if (approved == true && posted == true) {
+                            var $postedAlert = $("#postedAlert");
+                            $postedAlert.on("close.bs.alert", function () {
+                                $postedAlert.hide();
+                                return false;
+                            });
+
+                            $("#postedAlert").show();
+                        }
                     });
                     
                 },
@@ -303,23 +358,6 @@ mymodal.directive('fullCalendar', function () {
 
     }
 
-});
-
-/*
- *Header Directive
- */
-
-mymodal.directive("titleBar", function () {
-    return {
-        transclude: false,
-        scope: {
-            title: '@',
-            subtitle: '@'
-
-        },
-        templateUrl: "demos/header/titleBarTemplate.html"
-
-    };
 });
 
 /*
@@ -374,9 +412,10 @@ mymodal.factory("CalendarFactory", function () {
         
         hoursArray.length = 0;
         minutesArray.length = 0;
-
-        console.log(hoursArray);
-        console.log(minutesArray);
+        i = 0;
+        
+        console.log("Hours Array: ", hoursArray);
+        console.log("Minutes Array: ", minutesArray);
     }
 
     function editTimes(x, y) {
@@ -549,14 +588,26 @@ mymodal.factory("CalendarFactory", function () {
         }
 
         // whole day
-        if (((isXAP == "A") || (isXAP == "a")) && ((isYAP == "P") || (isYAP == "p")) && (h == h2)) {
+        if (((isXAP == "A") || (isXAP == "a")) && ((isYAP == "A") || (isYAP == "a")) && (h == h2)) {
             hours = 24;
         }
 
         // whole day
-        if (((isXAP == "P") || (isXAP == "p")) && ((isYAP == "A") || (isYAP == "a")) && (h == h2)) {
+        if (((isXAP == "P") || (isXAP == "p")) && ((isYAP == "P") || (isYAP == "p")) && (h == h2)) {
 
             hours = 24;
+
+        }
+
+        // 12hr day
+        if (((isXAP == "A") || (isXAP == "a")) && ((isYAP == "P") || (isYAP == "p")) && (h == h2)) {
+            hours = 12;
+        }
+
+        // 12hr day
+        if (((isXAP == "P") || (isXAP == "p")) && ((isYAP == "A") || (isYAP == "a")) && (h == h2)) {
+
+            hours = 12;
 
         }
 
@@ -598,18 +649,17 @@ mymodal.factory("CalendarFactory", function () {
 
         //hoursArray.push((hours * days) + extraHours);
         hoursArray.push(hours * days);
-        console.log(hoursArray);
+        console.log("Hours Array: ", hoursArray);
 
         //minutesArray.push((minutes * days) % 60);
         minutesArray.push(minutes * days);
         //console.log(117 / 60);
 
-        console.log(minutesArray);
+        console.log("Minutes Array: ", minutesArray);
 
     }
 
     function addAllHours() {
-        console.log("in add all hours function");
         var totalHours = 0;
         $.each(hoursArray, function () {
             totalHours += this;
@@ -651,6 +701,29 @@ mymodal.factory("CalendarFactory", function () {
         $("#deleteAlert").show();
     }
 
+    function confirmSubmit() {
+        var $preSubmitAlert = $("#preSubmitAlert");
+        $preSubmitAlert.on("close.bs.alert", function () {
+            $preSubmitAlert.hide();
+            return false;
+        });
+
+        $("#preSubmitAlert").show();
+    }
+
+    function submitHours() {
+        var $submitAlert = $("#submitAlert");
+        $submitAlert.on("close.bs.alert", function () {
+            $submitAlert.hide();
+            return false;
+        });
+        
+
+        $("#submitAlert").show();
+
+        approved = true;
+    }
+
 
     function showOptions() {
         $('#myModal3').modal('show');
@@ -675,7 +748,9 @@ mymodal.factory("CalendarFactory", function () {
         addAllHours: addAllHours,
         saveOptions: saveOptions,
         showOptions: showOptions,
-        confirmDelete: confirmDelete
+        confirmDelete: confirmDelete,
+        submitHours: submitHours,
+        confirmSubmit: confirmSubmit
 
     }
 
@@ -732,6 +807,20 @@ mymodal.directive('address', function () {
     }
 
 
+});
+
+mymodal.directive('headerFramework', function () {
+    return {
+        transclude: false,
+        scope: {
+            title: '@',
+            subtitle: '@'
+
+        },
+
+        templateUrl: "header/headerFrameworkTemplate.html"
+
+    };
 });
 
 

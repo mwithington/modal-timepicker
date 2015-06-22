@@ -101,6 +101,8 @@
     <Content Include="fullcalendar-2.3.1\demos\default.html" />
     <Content Include="fullcalendar-2.3.1\demos\external-dragging.html" />
     <Content Include="fullcalendar-2.3.1\demos\gcal.html" />
+    <Content Include="fullcalendar-2.3.1\demos\header\header.css" />
+    <Content Include="fullcalendar-2.3.1\demos\header\headerFrameworkTemplate.html" />
     <Content Include="fullcalendar-2.3.1\demos\jquery-clockpicker.min.css" />
     <Content Include="fullcalendar-2.3.1\demos\jquery-clockpicker.min.js" />
     <Content Include="fullcalendar-2.3.1\demos\json.html" />
