@@ -65,6 +65,24 @@ mymodal.controller('MainCtrl', function ($scope, $http, CalendarFactory) {
 
 
 
+
+    $http.get('json2.json').success(function (data) {
+
+        $scope.eventTitle = data.title;
+
+        $scope.eventStart = data.start;
+
+        $scope.eventEnd = data.end;
+
+
+
+
+
+
+    });
+
+
+
     
     $scope.start_time = '12:00AM',
     $scope.end_time = '12:00PM',
@@ -114,6 +132,11 @@ mymodal.controller('MainCtrl', function ($scope, $http, CalendarFactory) {
 
     $scope.confirmSubmit = function () {
         CalendarFactory.confirmSubmit();
+    };
+
+
+    $scope.readingFile = function () {
+        CalendarFactory.readingFile($scope.eventTitle, $scope.eventStart, $scope.eventEnd)
     };
 
 });
@@ -737,6 +760,19 @@ mymodal.factory("CalendarFactory", function () {
         $('#myModal3').modal('hide');
 
     }
+    function readingFile(x, y, z) {
+
+
+        $("#calendar").fullCalendar('renderEvent',
+            {
+
+                title: x,
+                start: y,
+                end: z
+            },
+            true);
+    }
+
 
     var factory = {
         assignEvent: assignEvent,
@@ -750,7 +786,8 @@ mymodal.factory("CalendarFactory", function () {
         showOptions: showOptions,
         confirmDelete: confirmDelete,
         submitHours: submitHours,
-        confirmSubmit: confirmSubmit
+        confirmSubmit: confirmSubmit,
+        readingFile: readingFile
 
     }
 
