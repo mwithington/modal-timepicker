@@ -1,7 +1,7 @@
 ﻿.ps-title-bar {
     background-color: white;
     padding: 0 20px;
-    /*border-bottom: 2px solid black;*/
+    border-bottom: 1px solid black;
 }
 
 .ps-logo-area {
@@ -12,14 +12,7 @@
     display: inline-block;
 }
 
-.ps-icon {
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    margin: 8px;
-    vertical-align: top;
-    border: 1px solid #999;
-}
+
 
 .ps-logo-title {
     color: #111;
@@ -47,29 +40,9 @@
     .ps-logo-area {
         text-align: left;
     }
+    
 }
 
 
 
 
-
-
-.ps-menu-area-vertical {
-    position: absolute;
-    /*top: 66px;*/
-    /*bottom: 0;*/
-    width: 200px;
-    padding-top: 30px;
-
-    /*background-color #333;
-    color: #ccc;*/
-}
-
-.ps-menu-area-horizontal {
-    position: absolute;
-    /*top: 66px;*/
-    height: 40px;
-    width: 100%;
-    /*background-color: #333;
-    color: #ccc;*/
-}

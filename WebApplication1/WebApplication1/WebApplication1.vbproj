@@ -88,6 +88,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="ext-modules\headerFrameworkModule.js" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fullcalendar-2.3.1\demos\bootstrap-clockpicker.min.css" />
     <Content Include="fullcalendar-2.3.1\demos\bootstrap-clockpicker.min.js" />
@@ -102,6 +103,8 @@
     <Content Include="fullcalendar-2.3.1\demos\external-dragging.html" />
     <Content Include="fullcalendar-2.3.1\demos\gcal.html" />
     <Content Include="fullcalendar-2.3.1\demos\header\header.css" />
+    <Content Include="fullcalendar-2.3.1\demos\header\headerFrameworkController.js" />
+    <Content Include="fullcalendar-2.3.1\demos\header\headerFrameworkDirective.js" />
     <Content Include="fullcalendar-2.3.1\demos\header\headerFrameworkTemplate.html" />
     <Content Include="fullcalendar-2.3.1\demos\jquery-clockpicker.min.css" />
     <Content Include="fullcalendar-2.3.1\demos\jquery-clockpicker.min.js" />
