@@ -56,7 +56,24 @@ mymodal.controller('MainCtrl', function ($scope, $http, CalendarFactory) {
             $scope.proCodes[k] = data.project_codes[k][0];
             console.log("User Id", $scope.proCodes)
         }
+
+
+        $scope.payCodes = data.pay_codes;
+        $scope.payCodes = [];
+        for (var k = 0; k < data.pay_codes.length; k++) {
+            $scope.payCodes[k] = data.pay_codes[k][0];
+            console.log("User Id", $scope.payCodes)
+        }
         
+
+
+        $scope.shiftCodes = data.shift_codes;
+        $scope.shiftCodes = [];
+        for (var k = 0; k < data.shift_codes.length; k++) {
+            $scope.shiftCodes[k] = data.shift_codes[k][0];
+            console.log("User Id", $scope.shiftCodes)
+        }
+
 
         
 
@@ -284,6 +301,7 @@ mymodal.directive('fullCalendar', function () {
                 editable: false,
                 eventLimit: true, // allow "more" link when too many events
                 selectable: true,
+                header: {center: "month,basicWeek,basicDay"},
 
                 //select
                 select: function (start, end) {
@@ -808,6 +826,8 @@ mymodal.directive('userInfoCard', function () {
             deptCode: '=',
             locCode: '=',
             proCode: '=',
+            payCode: '=',
+            shiftCode: '=',
             initialCollapsed: '@collapsed'
         },
         controller: function ($scope) {
