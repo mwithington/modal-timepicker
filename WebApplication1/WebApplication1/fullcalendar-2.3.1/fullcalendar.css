@@ -485,16 +485,16 @@ temporary rendered events).
 /* Scrolling Container
 --------------------------------------------------------------------------------------------------*/
 
-.fc-scroller { /* this class goes on elements for guaranteed vertical scrollbars */
-	overflow-y: scroll;
+/*.fc-scroller { /* this class goes on elements for guaranteed vertical scrollbars */
+	/*overflow-y: scroll;
 	overflow-x: hidden;
-}
+}*/
 
-.fc-scroller > * { /* we expect an immediate inner element */
-	position: relative; /* re-scope all positions */
-	width: 100%; /* hack to force re-sizing this inner element when scrollbars appear/disappear */
-	overflow: hidden; /* don't let negative margins or absolute positioning create further scroll */
-}
+/*.fc-scroller > * { /* we expect an immediate inner element */
+	/*position: relative; /* re-scope all positions */
+	/*width: 100%; /* hack to force re-sizing this inner element when scrollbars appear/disappear */
+	/*overflow: hidden; /* don't let negative margins or absolute positioning create further scroll */
+/*}*/
 
 
 /* Global Event Styles
@@ -1078,6 +1078,7 @@ ul{
 }
 li{
     padding: .5em;
+    text-align: center;
 }
 
 /*****************     aside section              *****************************/
