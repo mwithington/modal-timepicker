@@ -488,6 +488,7 @@ mymodal.factory("CalendarFactory", function () {
         console.log(endT, "endt date");
 
         var date1 = new Date(startT.format());
+
         var date2 = new Date(endT.format());
 
         console.log(date1, "Date one");
